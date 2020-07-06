@@ -1,8 +1,57 @@
+$black: #1b1b1b;
+$gray: #636363;
+$lgray: #838383;
+$dgray: #2c2d31;
+
 html {
   font-family: "Nanum Gothic", cursive;
   font-size: 1.25rem;
+  height: 100%;
   body {
+    height: 100%;
     margin: 0;
     padding: 0;
+    .main_container {
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 4rem auto 20px auto;
+      .menu_category {
+        display: flex;
+        justify-content: space-between;
+        width: 140px;
+        a {
+          cursor: pointer;
+          font-size: 24px;
+          color: $gray;
+        }
+      }
+      .input_box {
+        width: 560px;
+        height: 45px;
+        margin-top: 20px;
+        display: flex;
+        position: relative;
+        input {
+          width: 100%;
+          height: 100%;
+          font-size: 25px;
+          border-radius: 6px;
+          border: 1px solid $lgray;
+        }
+        .input_box_search {
+          position: absolute;
+          align-self: center;
+          right: 20px;
+          color: $lgray;
+        }
+      }
+      .post_item {
+        width: 560px;
+        height: 240px;
+        border-bottom: 1px solid $lgray;
+      }
+    }
   }
 }

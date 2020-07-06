@@ -1,0 +1,152 @@
+$black: #1b1b1b;
+$gray: #636363;
+$lgray: #838383;
+$dgray: #2c2d31;
+
+@mixin item_flex {
+  display: flex;
+  align-items: center;
+}
+@keyframes slide {
+  from {
+    margin-bottom: -30px;
+  }
+  to {
+    margin-bottom: 0px;
+  }
+}
+
+@keyframes slideout {
+  from {
+    margin-bottom: 0px;
+  }
+  to {
+    margin-bottom: -30px;
+  }
+}
+@mixin show_sns() {
+  @for $i from 1 through 3 {
+    &:nth-child(#{$i}) {
+      animation-name: slide;
+      animation-duration: 0.8s;
+      transition: opacity 0.5s ease-in-out #{$i/10}s;
+      opacity: 1;
+    }
+  }
+}
+@mixin hide_sns() {
+  $num: 0.3;
+  @for $i from 1 through 3 {
+    animation-name: slideout;
+    animation-duration: 1.5s;
+    &:nth-child(#{$i}) {
+      transition: opacity 0.5s ease-in-out #{$num}s;
+      opacity: 0;
+    }
+    $num: $num - 0.1;
+  }
+}
+
+header {
+  height: 250px;
+  position: relative;
+  @include item_flex();
+  justify-content: space-between;
+  a {
+    text-decoration: none;
+    color: $black;
+    font-weight: bold;
+    font-size: 25px;
+  }
+  .title_container {
+    @include item_flex();
+    .title {
+      @include item_flex();
+      align-items: flex-end;
+      max-width: 400px;
+      height: 100%;
+      margin-left: 50px;
+      .title_text {
+        span {
+          color: $lgray;
+          font-size: 14px;
+        }
+      }
+
+      img {
+        height: 100px;
+        margin-right: 3px;
+        padding: 3px;
+        border-radius: 50%;
+        border: 3px solid $dgray;
+      }
+    }
+    .about_btn {
+      font-size: 10px;
+      font-weight: 500;
+      margin-left: 10px;
+      border-radius: 5px;
+      padding: 5px;
+      background-color: $dgray;
+      color: white;
+
+      position: relative;
+      top: 13px;
+      &:hover {
+        transition: color 0.8s ease-out;
+        background-color: $black;
+      }
+    }
+  }
+  .contect_sns {
+    position: absolute;
+    bottom: 40px;
+    margin-left: 90px;
+    cursor: pointer;
+    button {
+      font-size: 20px;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+      &.active {
+        transform: rotate(180deg);
+      }
+    }
+    div {
+      width: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+
+      a {
+        display: none;
+        margin-top: 5px;
+        &.hidden {
+          //display 속성은 트랜지션의 영향을 받지 않기 때문에 opacity로 관리
+          @include hide_sns(); //시간차 애니메이션
+        }
+        &.showing {
+          @include show_sns(); //시간차 애니메이션
+        }
+        &.active {
+          display: block;
+        }
+      }
+    }
+  }
+  .right_menu {
+    margin-right: 30px;
+    svg {
+      margin: 30px 30px 0px 0px;
+      color: $lgray;
+
+      &:hover {
+        transition: color 0.8s ease-out;
+        color: $black;
+      }
+    }
+  }
+}

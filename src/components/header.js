@@ -1,42 +1,85 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import { Link } from "gatsby";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import profile1 from "../images/profile1.jpg";
+import {
+  FaSearch,
+  FaGithub,
+  FaFacebook,
+  FaInstagram,
+  FaTags,
+  FaSun,
+  FaMoon,
+  FaAngleDown,
+} from "react-icons/fa";
+import "./compoStyles/header.scss";
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
+const Header = ({ siteTitle }) => {
+  const [sns, setSns] = useState("");
+  const [snsTransition, setSnsTransition] = useState("hidden");
+
+  const showSns = () => {
+    if (sns === "") {
+      setSns("active");
+      setTimeout(() => {
+        setSnsTransition("showing");
+      }, 0); //시간을 0으로 해도 실행되고 있던 메서드가 다 끝난후에 실행됨.
+    } else {
+      setSnsTransition("hidden");
+      setTimeout(() => {
+        setSns("");
+      }, 700);
+    }
+  };
+  return (
+    <header>
+      <div className="title_container">
+        <Link to="/" className="title">
+          <img src={profile1} alt="Home" />
+          <div className="title_text">
+            {siteTitle}
+            <br />
+            <span>시작이 반이다.</span>
+          </div>
         </Link>
-      </h1>
-    </div>
-  </header>
-)
+        <Link to="/" className="about_btn">
+          About me
+        </Link>
+      </div>
+      <div className="contect_sns">
+        <button onClick={showSns} className={sns}>
+          <FaAngleDown />
+        </button>
+        <div className="contect_sns_list">
+          <a className={`${sns} ${snsTransition}`}>
+            <FaInstagram />
+          </a>
+          <a className={`${sns} ${snsTransition}`}>
+            <FaGithub />
+          </a>
+          <a className={`${sns} ${snsTransition}`}>
+            <FaFacebook />
+          </a>
+        </div>
+      </div>
+      <div className="right_menu">
+        <a>
+          <FaTags />
+        </a>
+        <a>
+          <FaSearch />
+        </a>
+      </div>
+    </header>
+  );
+};
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-}
+};
 
 Header.defaultProps = {
   siteTitle: ``,
-}
+};
 
-export default Header
+export default Header;
