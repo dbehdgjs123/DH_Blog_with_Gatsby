@@ -13,10 +13,14 @@ import {
   FaAngleDown,
 } from "react-icons/fa";
 import "./compoStyles/header.scss";
+import TagList from "./taglist";
 
 const Header = ({ siteTitle }) => {
   const [sns, setSns] = useState("");
   const [snsTransition, setSnsTransition] = useState("hidden");
+
+  const [tagMenu, setTagMenu] = useState("");
+  const [tagTransition, setTagTransition] = useState("hidden");
 
   const showSns = () => {
     if (sns === "") {
@@ -29,6 +33,20 @@ const Header = ({ siteTitle }) => {
       setTimeout(() => {
         setSns("");
       }, 700);
+    }
+  };
+
+  const showTag = () => {
+    if (tagMenu === "") {
+      setTagMenu("active");
+      setTimeout(() => {
+        setTagTransition("showing");
+      }, 0); //시간을 0으로 해도 실행되고 있던 메서드가 다 끝난후에 실행됨.
+    } else {
+      setTagTransition("hidden");
+      setTimeout(() => {
+        setTagMenu("");
+      }, 1200);
     }
   };
   return (
@@ -63,9 +81,12 @@ const Header = ({ siteTitle }) => {
         </div>
       </div>
       <div className="right_menu">
-        <a>
-          <FaTags />
-        </a>
+        <div className="right_menu_tag">
+          <a onClick={showTag} className={tagMenu}>
+            <FaTags />
+          </a>
+          <TagList transition={tagTransition} tagState={tagMenu} />
+        </div>
         <a>
           <FaSearch />
         </a>

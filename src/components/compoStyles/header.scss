@@ -24,8 +24,8 @@ $dgray: #2c2d31;
     margin-bottom: -30px;
   }
 }
-@mixin show_sns() {
-  @for $i from 1 through 3 {
+@mixin show_sns($from: 1, $through: 3) {
+  @for $i from $from through $through {
     &:nth-child(#{$i}) {
       animation-name: slide;
       animation-duration: 0.8s;
@@ -34,9 +34,9 @@ $dgray: #2c2d31;
     }
   }
 }
-@mixin hide_sns() {
-  $num: 0.3;
-  @for $i from 1 through 3 {
+@mixin hide_sns($from: 1, $through: 3, $hideSpeed: 0.3) {
+  $num: $hideSpeed;
+  @for $i from $from through $through {
     animation-name: slideout;
     animation-duration: 1.5s;
     &:nth-child(#{$i}) {
@@ -138,14 +138,52 @@ header {
     }
   }
   .right_menu {
-    margin-right: 30px;
+    margin-right: 60px;
+    display: flex;
     svg {
-      margin: 30px 30px 0px 0px;
+      margin-top: 30px;
       color: $lgray;
 
       &:hover {
         transition: color 0.8s ease-out;
         color: $black;
+      }
+    }
+    .right_menu_tag {
+      position: relative;
+      margin-right: 40px;
+      display: flex;
+      justify-content: center;
+
+      .tag_list {
+        top: 70px;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        a {
+          margin: 0 auto;
+          padding: 10px;
+          margin-top: 10px;
+          border-radius: 10px;
+          cursor: pointer;
+          color: white;
+          background-color: $dgray;
+
+          display: none;
+          &:hover {
+            background-color: $black;
+          }
+          &.hidden {
+            //display 속성은 트랜지션의 영향을 받지 않기 때문에 opacity로 관리
+            @include hide_sns(1, 5, 0.5); //시간차 애니메이션
+          }
+          &.showing {
+            @include show_sns(1, 5); //시간차 애니메이션
+          }
+          &.active {
+            display: block;
+          }
+        }
       }
     }
   }

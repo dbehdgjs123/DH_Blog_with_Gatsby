@@ -2,11 +2,14 @@ $black: #1b1b1b;
 $gray: #636363;
 $lgray: #838383;
 $dgray: #2c2d31;
+$white: #ecedf1;
+$lwhite: #f2f3f7;
 
 html {
   font-family: "Nanum Gothic", cursive;
   font-size: 1.25rem;
   height: 100%;
+  background-color: $lwhite;
   body {
     height: 100%;
     margin: 0;
@@ -20,11 +23,17 @@ html {
       .menu_category {
         display: flex;
         justify-content: space-between;
-        width: 140px;
+        width: 170px;
         a {
           cursor: pointer;
           font-size: 24px;
-          color: $gray;
+          padding: 10px 10px;
+
+          color: $lgray;
+          &.active {
+            color: $dgray;
+            border-bottom: 2px solid $dgray;
+          }
         }
       }
       .input_box {
@@ -47,10 +56,38 @@ html {
           color: $lgray;
         }
       }
-      .post_item {
-        width: 560px;
-        height: 240px;
-        border-bottom: 1px solid $lgray;
+      .post_list {
+        .post_item {
+          position: relative;
+          width: 560px;
+          height: 240px;
+          border-bottom: 1px solid $lgray;
+          display: flex;
+          align-items: center;
+          p {
+            font-size: 0.8rem;
+            color: $gray;
+          }
+          .post_item_tag {
+            position: absolute;
+            right: 0px;
+            bottom: 10px;
+
+            a {
+              cursor: pointer;
+              margin-right: 10px;
+              padding: 5px;
+              border-radius: 8px;
+              font-size: 16px;
+              background-color: $lgray;
+              color: white;
+              &:hover {
+                transition: background-color 0.5s ease-out;
+                background-color: $black;
+              }
+            }
+          }
+        }
       }
     }
   }
