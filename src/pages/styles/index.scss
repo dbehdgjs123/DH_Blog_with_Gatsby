@@ -10,6 +10,10 @@ html {
   font-size: 1.25rem;
   height: 100%;
   background-color: $lwhite;
+  a {
+    text-decoration: none;
+    color: $dgray;
+  }
   body {
     height: 100%;
     margin: 0;
@@ -66,8 +70,19 @@ html {
           align-items: center;
           p {
             font-size: 0.8rem;
+            padding-left: 15px;
             color: $gray;
           }
+
+          .post_item_date {
+            position: absolute;
+            font-size: 14px;
+            left: 0px;
+            bottom: 0px;
+            color: $lgray;
+            font-weight: bold;
+          }
+
           .post_item_tag {
             position: absolute;
             right: 0px;

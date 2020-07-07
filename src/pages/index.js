@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { graphql } from "gatsby";
+import { Link } from "gatsby";
 import { FaSearch, FaTags } from "react-icons/fa";
 import Layout from "../components/layout";
 import PostItem from "../components/postitem"; // 전체 글목록

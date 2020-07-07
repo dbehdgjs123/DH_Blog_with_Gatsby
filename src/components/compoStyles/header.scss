@@ -161,6 +161,7 @@ header {
         display: flex;
         flex-direction: column;
         a {
+          z-index: 11;
           margin: 0 auto;
           padding: 10px;
           margin-top: 10px;
@@ -175,7 +176,7 @@ header {
           }
           &.hidden {
             //display 속성은 트랜지션의 영향을 받지 않기 때문에 opacity로 관리
-            @include hide_sns(1, 5, 0.5); //시간차 애니메이션
+            @include hide_sns(1, 7, 0.5); //시간차 애니메이션
           }
           &.showing {
             @include show_sns(1, 5); //시간차 애니메이션
