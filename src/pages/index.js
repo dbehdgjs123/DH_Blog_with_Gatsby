@@ -7,9 +7,13 @@ import "./styles/index.scss"; //페이지 전체에 적용해야할 스타일
 
 const IndexPage = ({ data }) => {
   const [menuSelect, setMenuSelect] = useState(false);
+  const [searchInput, setsearchInput] = useState("");
 
   const onSelectMenu = () => {
     setMenuSelect(!menuSelect); //false 일땐 개발에 체크, 그렇지 않을땐 일상이 되어있게함.
+  };
+  const searchHandler = e => {
+    setsearchInput(e.target.value);
   };
 
   return (
@@ -24,11 +28,11 @@ const IndexPage = ({ data }) => {
           </a>
         </div>
         <div className="input_box">
-          <input type="text" />
+          <input type="text" value={searchInput} onChange={searchHandler} />
           <FaSearch className="input_box_search" />
         </div>
         <div className="post_list">
-          <PostItem />
+          <PostItem category={menuSelect} searchData={searchInput} />
         </div>
       </div>
     </Layout>

@@ -1,5 +1,6 @@
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, Link } from "gatsby";
+import kebabCase from "lodash/kebabCase";
 
 function TagList({ transition, tagState }) {
   const data = useStaticQuery(graphql`
@@ -14,9 +15,13 @@ function TagList({ transition, tagState }) {
   `);
 
   const tagItem = data.allMarkdownRemark.group.map(({ tag }, index) => (
-    <a key={index} className={`${tagState} ${transition}`}>
+    <Link
+      to={`/tags/${kebabCase(tag)}`}
+      key={index}
+      className={`${tagState} ${transition}`}
+    >
       {tag}
-    </a>
+    </Link>
   ));
   return <div className="tag_list">{tagItem}</div>;
 }

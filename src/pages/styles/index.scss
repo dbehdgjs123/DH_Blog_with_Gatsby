@@ -7,7 +7,7 @@ $lwhite: #f2f3f7;
 
 html {
   font-family: "Nanum Gothic", cursive;
-  font-size: 1.25rem;
+  font-size: 16px;
   height: 100%;
   background-color: $lwhite;
   a {
@@ -30,7 +30,7 @@ html {
         width: 170px;
         a {
           cursor: pointer;
-          font-size: 24px;
+          font-size: 1.5rem;
           padding: 10px 10px;
 
           color: $lgray;
@@ -69,14 +69,14 @@ html {
           display: flex;
           align-items: center;
           p {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             padding-left: 15px;
             color: $gray;
           }
 
           .post_item_date {
             position: absolute;
-            font-size: 14px;
+            font-size: 0.9rem;
             left: 0px;
             bottom: 0px;
             color: $lgray;
@@ -93,7 +93,7 @@ html {
               margin-right: 10px;
               padding: 5px;
               border-radius: 8px;
-              font-size: 16px;
+              font-size: 1rem;
               background-color: $lgray;
               color: white;
               &:hover {
@@ -101,6 +101,13 @@ html {
                 background-color: $black;
               }
             }
+          }
+          .not_search {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            font-size: 1rem;
+            color: $gray;
           }
         }
       }
