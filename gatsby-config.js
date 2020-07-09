@@ -16,7 +16,23 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
-    `gatsby-transformer-remark`,
+    `gatsby-plugin-styled-components`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              className: `anchor-header`, //지정된 링크를 하이라이트하기위해 설정
+              maintainCase: false, //url이 대소문자를 구분하기 때문에 링크가 작동하지 않을 수 있다.
+              removeAccents: true,
+              elements: [`h2`, "h3", `h4`],
+            },
+          },
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -29,6 +45,7 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {

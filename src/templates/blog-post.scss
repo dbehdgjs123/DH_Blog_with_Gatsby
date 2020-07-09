@@ -1,0 +1,12 @@
+main {
+  position: relative;
+  .blog-post-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 960px;
+    .blog-post-title {
+      margin-bottom: 90px;
+    }
+  }
+}
