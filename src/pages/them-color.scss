@@ -1,0 +1,20 @@
+body {
+  &.light {
+    $bg: #ecedf1;
+    $title: #2c2d31;
+    $subtitle: #838383;
+    $text: #636363;
+    $btn: #838383;
+    $active: #1b1b1b;
+    $line: #838383;
+  }
+  &.dark {
+    $bg: #1b1b1b;
+    $title: #838383;
+    $subtitle: #636363;
+    $text: #838383;
+    $btn: #636363;
+    $active: #636363;
+    $line: #636363;
+  }
+}

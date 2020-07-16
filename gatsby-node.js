@@ -28,9 +28,68 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
   const result = await graphql(`
     query {
-      blogquery: allMarkdownRemark {
+      blogquery: allMarkdownRemark(
+        filter: { frontmatter: { category: { ne: "daily" } } }
+        sort: { fields: [frontmatter___date], order: DESC }
+      ) {
         edges {
           node {
+            fields {
+              slug
+            }
+          }
+          next {
+            frontmatter {
+              title
+              date
+              tags
+              category
+            }
+            fields {
+              slug
+            }
+          }
+          previous {
+            frontmatter {
+              title
+              date
+              tags
+              category
+            }
+            fields {
+              slug
+            }
+          }
+        }
+      }
+      dailyblogquery: allMarkdownRemark(
+        filter: { frontmatter: { category: { eq: "daily" } } }
+        sort: { fields: [frontmatter___date], order: DESC }
+      ) {
+        edges {
+          node {
+            fields {
+              slug
+            }
+          }
+          next {
+            frontmatter {
+              title
+              date
+              tags
+              category
+            }
+            fields {
+              slug
+            }
+          }
+          previous {
+            frontmatter {
+              title
+              date
+              tags
+              category
+            }
             fields {
               slug
             }
@@ -50,12 +109,26 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return;
   }
 
-  result.data.blogquery.edges.forEach(({ node }) => {
+  result.data.blogquery.edges.forEach(({ node, next, previous }) => {
     createPage({
       path: node.fields.slug,
       component: path.resolve(`./src/templates/blog-post.js`),
       context: {
         slug: node.fields.slug,
+        next,
+        previous,
+      },
+    });
+  });
+
+  result.data.dailyblogquery.edges.forEach(({ node, next, previous }) => {
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve(`./src/templates/blog-post.js`),
+      context: {
+        slug: node.fields.slug,
+        next,
+        previous,
       },
     });
   });

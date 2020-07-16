@@ -10,4 +10,15 @@ $lwhite: #f2f3f7;
   height: 100%;
   top: 0;
   right: 0px;
+  div {
+    position: sticky;
+    top: 20rem;
+    width: 200px;
+    span {
+      font-weight: bold;
+      font-size: 1rem;
+      color: $gray;
+      border-bottom: 1px solid $gray;
+    }
+  }
 }

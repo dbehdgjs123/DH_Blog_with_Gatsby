@@ -1,6 +1,7 @@
 $black: #1b1b1b;
 $gray: #636363;
 $lgray: #838383;
+$vlgray: #bdbdbd;
 $dgray: #2c2d31;
 $white: #ecedf1;
 $lwhite: #f2f3f7;
@@ -19,100 +20,229 @@ html {
     text-decoration: none;
     color: $dgray;
   }
+
   body {
-    height: 100%;
+    min-height: 100%; //최소 높이값으로 설정해야 스크롤할때도 100%가 된다.
     margin: 0;
     padding: 0;
-    .main_container {
-      max-width: 720px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 4rem auto 20px auto;
-      .menu_category {
-        display: flex;
-        justify-content: space-between;
-        width: 170px;
-        a {
-          cursor: pointer;
-          font-size: 1.5rem;
-          padding: 10px 10px;
-
-          color: $lgray;
-          &.active {
-            color: $dgray;
-            border-bottom: 2px solid $dgray;
-          }
-        }
+    &.light {
+      transition: all 0.5s ease-in-out;
+      $bg: #ecedf1;
+      $title: #2c2d31;
+      $subtitle: #838383;
+      $text: #636363;
+      $btn: #838383;
+      $active: #1b1b1b;
+      $line: #838383;
+      background-color: $bg;
+      h1 {
+        color: $title;
       }
-      .input_box {
-        width: 560px;
-        height: 45px;
-        margin-top: 20px;
+      .main_container {
+        max-width: 720px;
         display: flex;
-        position: relative;
-        input {
-          width: 100%;
-          height: 100%;
-          font-size: 25px;
-          border-radius: 6px;
-          border: 1px solid $lgray;
-        }
-        .input_box_search {
-          position: absolute;
-          align-self: center;
-          right: 20px;
-          color: $lgray;
-        }
-      }
-      .post_list {
-        .post_item {
-          position: relative;
-          width: 560px;
-          height: 240px;
-          border-bottom: 1px solid $lgray;
+        flex-direction: column;
+        align-items: center;
+        margin: 4rem auto auto auto;
+        .menu_category {
           display: flex;
-          align-items: center;
-          p {
-            font-size: 0.9rem;
-            padding-left: 15px;
-            color: $gray;
-          }
+          justify-content: space-between;
+          width: 170px;
+          a {
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 10px 10px;
 
-          .post_item_date {
-            position: absolute;
-            font-size: 0.9rem;
-            left: 0px;
-            bottom: 0px;
-            color: $lgray;
-            font-weight: bold;
-          }
-
-          .post_item_tag {
-            position: absolute;
-            right: 0px;
-            bottom: 10px;
-
-            a {
-              cursor: pointer;
-              margin-right: 10px;
-              padding: 5px;
-              border-radius: 8px;
-              font-size: 1rem;
-              background-color: $lgray;
-              color: white;
-              &:hover {
-                transition: background-color 0.5s ease-out;
-                background-color: $black;
-              }
+            color: $subtitle;
+            &.active {
+              color: $title;
+              border-bottom: 2px solid $title;
             }
           }
-          .not_search {
+        }
+        .input_box {
+          width: 560px;
+          height: 45px;
+          margin-top: 20px;
+          display: flex;
+          position: relative;
+          input {
             width: 100%;
+            height: 100%;
+            font-size: 1.5rem;
+            border-radius: 6px;
+            border: 1px solid $lgray;
+            &::placeholder {
+              font-size: 1.2rem;
+            }
+          }
+          .input_box_search {
+            position: absolute;
+            align-self: center;
+            right: 20px;
+            color: $lgray;
+          }
+        }
+        .post_list {
+          .post_item {
+            position: relative;
+            width: 560px;
+            height: 240px;
+            border-bottom: 1px solid $line;
             display: flex;
-            justify-content: center;
-            font-size: 1rem;
-            color: $gray;
+            align-items: center;
+            p {
+              font-size: 0.9rem;
+              padding-left: 15px;
+              color: $text;
+            }
+
+            .post_item_date {
+              position: absolute;
+              font-size: 0.9rem;
+              left: 0px;
+              bottom: 0px;
+              color: $subtitle;
+              font-weight: bold;
+            }
+
+            .post_item_tag {
+              position: absolute;
+              right: 0px;
+              bottom: 10px;
+
+              a {
+                cursor: pointer;
+                margin-right: 10px;
+                padding: 5px;
+                border-radius: 8px;
+                font-size: 1rem;
+                background-color: $lgray;
+                color: white;
+                &:hover {
+                  transition: background-color 0.5s ease-out;
+                  background-color: $active;
+                }
+              }
+            }
+            .not_search {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              font-size: 1rem;
+              color: $gray;
+            }
+          }
+        }
+      }
+    }
+    &.dark {
+      transition: all 0.5s ease-in-out;
+      $bg: #1b1b1b;
+      $title: #838383;
+      $subtitle: #636363;
+      $text: #838383;
+      $btn: #636363;
+      $active: #838383;
+      $line: #636363;
+      background-color: $bg;
+      h1 {
+        color: $title;
+      }
+      .main_container {
+        max-width: 720px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 4rem auto auto auto;
+        .menu_category {
+          display: flex;
+          justify-content: space-between;
+          width: 170px;
+          a {
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 10px 10px;
+
+            color: $subtitle;
+            &.active {
+              color: $title;
+              border-bottom: 2px solid $title;
+            }
+          }
+        }
+        .input_box {
+          width: 560px;
+          height: 45px;
+          margin-top: 20px;
+          display: flex;
+          position: relative;
+          input {
+            width: 100%;
+            height: 100%;
+            font-size: 1.5rem;
+            border-radius: 6px;
+            border: 1px solid $lgray;
+            &::placeholder {
+              font-size: 1.2rem;
+            }
+          }
+          .input_box_search {
+            position: absolute;
+            align-self: center;
+            right: 20px;
+            color: $lgray;
+          }
+        }
+        .post_list {
+          .post_item {
+            position: relative;
+            width: 560px;
+            height: 240px;
+            border-bottom: 1px solid $line;
+            display: flex;
+            align-items: center;
+            p {
+              font-size: 0.9rem;
+              padding-left: 15px;
+              color: $text;
+            }
+
+            .post_item_date {
+              position: absolute;
+              font-size: 0.9rem;
+              left: 0px;
+              bottom: 0px;
+              color: $subtitle;
+              font-weight: bold;
+            }
+
+            .post_item_tag {
+              position: absolute;
+              right: 0px;
+              bottom: 10px;
+
+              a {
+                cursor: pointer;
+                margin-right: 10px;
+                padding: 5px;
+                border-radius: 8px;
+                font-size: 1rem;
+                background-color: $btn;
+                color: white;
+                &:hover {
+                  transition: background-color 0.5s ease-out;
+                  background-color: $active;
+                }
+              }
+            }
+            .not_search {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              font-size: 1rem;
+              color: $gray;
+            }
           }
         }
       }
