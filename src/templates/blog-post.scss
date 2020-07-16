@@ -1,10 +1,4 @@
-$black: #1b1b1b;
-$gray: #636363;
-$lgray: #8d8d8d;
-$vlgray: #bdbdbd;
-$dgray: #2c2d31;
-$white: #ecedf1;
-$lwhite: #f2f3f7;
+@import "../pages/them-color.scss";
 @mixin hoverItem($item, $itemColor) {
   &:hover {
     #{$item}: $itemColor; //보간
@@ -18,15 +12,16 @@ $lwhite: #f2f3f7;
   display: flex;
   justify-content: center;
   border-radius: 5px;
-  background-color: transparent;
-  border: 1px solid $vlgray;
-  @include hoverItem(background-color, $dgray);
+  border: 1px solid var(--line);
+  &:hover {
+    background-color: var(--btn3);
+  }
 }
 
 @mixin postBoxItem {
   align-self: center;
   line-height: 50px;
-  color: $dgray;
+  color: var(--text);
 }
 @mixin flexCenter {
   display: flex;
@@ -34,6 +29,14 @@ $lwhite: #f2f3f7;
   justify-content: center;
 }
 body {
+  h2,
+  h3,
+  h4 {
+    color: var(--title);
+  }
+  p {
+    color: var(--text);
+  }
   main {
     position: relative;
     .blog-post-container {
@@ -45,14 +48,13 @@ body {
         margin-top: 80px;
         margin-bottom: 50px;
         padding-bottom: 10px;
-        border-bottom: 1px solid $lgray;
+        border-bottom: 1px solid var(--line);
         h1 {
           font-size: 3.25rem;
         }
         .blog-post-subtitle {
           display: flex;
           justify-content: space-between;
-          color: $gray;
 
           .blog-post-tagbox {
             padding-bottom: 0.5rem;
@@ -62,18 +64,18 @@ body {
               padding: 5px;
               border-radius: 10px;
               font-size: 1rem;
-              background-color: $lgray;
+              background-color: var(--btn);
               color: white;
               &:hover {
                 transition: background-color 0.5s ease-out;
-                background-color: $black;
+                background-color: var(--active);
               }
             }
           }
           span {
             margin-right: 1rem;
             font-weight: bold;
-            color: $lgray;
+            color: var(--subtitle);
           }
         }
       }
@@ -84,26 +86,26 @@ body {
         .other-page-text {
           font-size: 1.2rem;
           font-weight: bold;
-          color: $dgray;
+          color: var(--text);
         }
         .other-page-subtext {
           font-size: 0.9rem;
-          color: $lgray;
+          color: var(--subtitle);
         }
         .other-page-prev {
           &:hover {
             .other-page-text {
               transition: color 0.2s linear;
-              color: $white;
+              color: var(--htext);
             }
             .other-page-subtext {
               transition: color 0.2s linear;
-              color: $white;
+              color: var(--htext);
             }
             .other-page-prev-left {
               transition: all 0.2s linear;
               margin-right: 20px;
-              color: $white;
+              color: var(--htext);
             }
           }
           @include postBox;
@@ -120,16 +122,16 @@ body {
           &:hover {
             .other-page-text {
               transition: color 0.2s linear;
-              color: $white;
+              color: var(--htext);
             }
             .other-page-subtext {
               transition: color 0.2s linear;
-              color: $white;
+              color: var(--htext);
             }
             .other-page-next-right {
               transition: all 0.2s linear;
               margin-left: 20px;
-              color: $white;
+              color: var(--htext);
             }
           }
           @include postBox;
@@ -140,103 +142,6 @@ body {
           div {
             @include flexCenter;
           }
-        }
-      }
-    }
-  }
-  &.dark {
-    $gray: #727272;
-    h2,
-    h3,
-    h4 {
-      color: $lgray;
-    }
-    p {
-      color: $gray;
-    }
-    .blog-post-container {
-      .blog-post-title {
-        border-bottom: 1px solid $gray;
-        h1 {
-          font-size: 3.25rem;
-          color: $lgray;
-        }
-        .blog-post-subtitle {
-          .blog-post-tagbox {
-            a {
-              cursor: pointer;
-              background-color: $gray;
-              color: white;
-              &:hover {
-                background-color: $lgray;
-              }
-            }
-          }
-          span {
-            color: $gray;
-          }
-        }
-      }
-    }
-    .other-page {
-      .other-page-text {
-        color: $lgray !important;
-      }
-      .other-page-subtext {
-        color: $gray !important;
-      }
-      .other-page-prev {
-        &:hover {
-          .other-page-text {
-            transition: color 0.2s linear;
-            color: $white !important;
-          }
-          .other-page-subtext {
-            transition: color 0.2s linear;
-
-            color: $white !important;
-          }
-          .other-page-prev-left {
-            transition: all 0.2s linear;
-            margin-right: 20px;
-            color: $white;
-          }
-        }
-        @include postBox;
-        border: 1px solid $gray !important;
-        .other-page-prev-left {
-          @include postBoxItem;
-          margin-right: 10px;
-        }
-        div {
-          @include flexCenter;
-          align-items: flex-end;
-        }
-      }
-      .other-page-next {
-        &:hover {
-          .other-page-text {
-            transition: color 0.2s linear;
-            color: $white !important;
-          }
-          .other-page-subtext {
-            transition: color 0.2s linear;
-            color: $white !important;
-          }
-          .other-page-next-right {
-            transition: all 0.2s linear;
-            margin-left: 20px;
-            color: $white;
-          }
-        }
-        @include postBox;
-        border: 1px solid $gray !important;
-        .other-page-next-right {
-          @include postBoxItem;
-          margin-left: 10px;
-        }
-        div {
-          @include flexCenter;
         }
       }
     }

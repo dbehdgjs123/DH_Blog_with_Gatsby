@@ -29,11 +29,7 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "TOGGLE_THEME": {
-      window.localStorage.setItem(
-        //저장
-        "themeColor",
-        state.theme === "light" ? "dark" : "light"
-      );
+      window.__setPreferredTheme(state.theme === "light" ? "dark" : "light");
 
       return {
         ...state,
@@ -52,8 +48,8 @@ function GlobalContextProvider({ children }) {
   return (
     <GlobalStateContext.Provider value={state}>
       <GlobalDispatchContext.Provider value={dispatch}>
-        <Helmet bodyAttributes={{ class: `${state.theme}` }} />
         {/*react-helmet의 기능을 이용하여 body에 클래스를 추가한다 */}
+        <Helmet bodyAttributes={{ class: `${state.theme}` }} />
         {children}
       </GlobalDispatchContext.Provider>
     </GlobalStateContext.Provider>

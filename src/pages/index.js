@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { Link } from "gatsby";
 import { FaSearch, FaTags } from "react-icons/fa";
 import Layout from "../components/layout";
