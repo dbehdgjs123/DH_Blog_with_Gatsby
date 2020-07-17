@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect, useContext, useMemo } from "react";
 import { Link } from "gatsby";
 import { FaSearch, FaTags } from "react-icons/fa";
 import Layout from "../components/layout";
@@ -23,7 +23,6 @@ const IndexPage = ({ data }) => {
   const searchRefHandler = () => {
     searchRef.current.focus();
   };
-
   return (
     <Layout searchRefHandler={searchRefHandler}>
       <div className="main_container">

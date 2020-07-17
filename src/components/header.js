@@ -19,7 +19,7 @@ import {
   GlobalStateContext,
 } from "../context/GlobalContextProvider";
 
-const Header = ({ siteTitle, searchRefHandler }) => {
+const Header = ({ siteTitle, searchRefHandler, headerActive }) => {
   const [sns, setSns] = useState("");
   const [snsTransition, setSnsTransition] = useState("hidden");
 
@@ -63,8 +63,9 @@ const Header = ({ siteTitle, searchRefHandler }) => {
       return;
     }
   };
+  console.log(headerActive);
   return (
-    <header>
+    <header className={headerActive}>
       <div className="title_container">
         <Link to="/" className="title">
           <img src={profile1} alt="Home" />
@@ -127,4 +128,4 @@ Header.defaultProps = {
   siteTitle: ``,
 };
 
-export default Header;
+export default React.memo(Header);

@@ -1,1 +1,25 @@
-
+@import "../../pages/them-color.scss";
+.header-container {
+  position: sticky;
+  height: 180px;
+  top: 0;
+  z-index: 1;
+  &.hidden {
+    z-index: -1;
+  }
+}
+.link-top {
+  position: fixed;
+  font-size: 3rem;
+  right: 40px;
+  bottom: -60px;
+  color: var(--btn2);
+  transition: bottom 0.2s ease-in-out;
+  &.active {
+    bottom: 30px;
+    z-index: 9999;
+  }
+  &:hover {
+    color: var(--active);
+  }
+}

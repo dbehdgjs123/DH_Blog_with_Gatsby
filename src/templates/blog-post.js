@@ -5,15 +5,19 @@ import "./blog-post.scss";
 import TOC from "../components/toc";
 import kebabCase from "lodash/kebabCase";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { Disqus, CommentCount } from "gatsby-plugin-disqus";
 
 //마크다운파일을 사용할 템플릿. 여기서 마크다운파일들이 실행됨.
 function BlogPost({ pageContext, data }) {
   const [tocHighlight, setTocHighlight] = useState(undefined);
   const post = data.markdownRemark;
   const { next, previous } = pageContext;
-  console.log("next" + next);
-  console.log("prev" + previous);
 
+  let disqusConfig = {
+    url: `http://localhost:8000${post.fields.slug}`,
+    identifier: post.fields.slug,
+    title: post.frontmatter.title,
+  };
   const nextPage =
     next !== null ? (
       <Link to={next.fields.slug}>
@@ -51,15 +55,22 @@ function BlogPost({ pageContext, data }) {
     return () => window.removeEventListener("scroll", onScrollHandler); //메모리 누수 방지
   }, []);
   const onScrollHandler = e => {
+    let checkpoint;
     const currentOffsetY = window.pageYOffset;
     const headerElements = document.querySelectorAll(".anchor-header");
     for (const item of headerElements) {
       const { top } = item.getBoundingClientRect();
       const elemTop = top + currentOffsetY;
       //const lastItem = headerElements[headerElements.length - 1];
-      if (elemTop <= currentOffsetY) {
+      if (elemTop < currentOffsetY + 10) {
         //현재 아이템의 높이와 페이지 크기를 합친 것보다  현재 높이가 크면 props로 보내준다.
-        setTocHighlight(item.href.split(window.location.origin)[1]);
+        //만약 마지막 아이템이면 무조건 크므로 checkpoint를 전달할 수 없게 된다. 그러므로 따로 조건문으로 처리한다.
+        checkpoint = item.href.split(window.location.origin)[1];
+        if (headerElements[headerElements.length - 1] === item) {
+          setTocHighlight(item.href.split(window.location.origin)[1]);
+        }
+      } else {
+        setTocHighlight(checkpoint);
       }
     }
   };
@@ -100,6 +111,9 @@ export const query = graphql`
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       tableOfContents
+      fields {
+        slug
+      }
       frontmatter {
         title
         date(formatString: "YYYY-MM-DD")

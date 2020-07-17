@@ -17,7 +17,6 @@ $dgray: #2c2d31;
     margin-bottom: 0px;
   }
 }
-
 @keyframes slideout {
   from {
     margin-bottom: 0px;
@@ -50,10 +49,16 @@ $dgray: #2c2d31;
 }
 
 header {
+  transition: all 0.4s ease-in-out;
   height: 180px;
   position: relative;
   @include item_flex();
   justify-content: space-between;
+  top: 0px;
+  &.hidden {
+    top: -180px;
+  }
+
   a {
     text-decoration: none;
     font-weight: bold;
@@ -67,7 +72,7 @@ header {
       align-items: flex-end;
       max-width: 400px;
       height: 100%;
-      margin-left: 50px;
+      margin-left: 20px;
       .title_text {
         color: var(--title);
         span {
@@ -77,7 +82,7 @@ header {
       }
 
       img {
-        height: 100px;
+        height: 85px;
         margin-right: 3px;
         padding: 3px;
         border-radius: 50%;
@@ -85,7 +90,7 @@ header {
       }
     }
     .about_btn {
-      font-size: 0.625rem;
+      font-size: 0.6rem;
       font-weight: 500;
       margin-left: 10px;
       border-radius: 5px;
@@ -94,7 +99,7 @@ header {
       color: white;
 
       position: relative;
-      top: 13px;
+      top: 6px;
       &:hover {
         transition: all 0.4s ease-out;
         background-color: var(--active);
@@ -103,8 +108,8 @@ header {
   }
   .contect_sns {
     position: absolute;
-    bottom: 5px;
-    margin-left: 90px;
+    bottom: 15px;
+    margin-left: 54px;
     cursor: pointer;
     button {
       font-size: 1.25rem;
@@ -143,7 +148,7 @@ header {
     }
   }
   .right_menu {
-    margin-right: 60px;
+    margin-right: 20px;
     display: flex;
     svg {
       margin-top: 30px;
