@@ -1,10 +1,12 @@
 $dgray: #2c2d31;
 @import "../them-color.scss";
+@import "../../components/compoStyles/media.scss";
 
 html {
   font-family: "Nanum Gothic", cursive;
   font-size: 16px;
   height: 100%;
+
   ul {
     list-style: none;
     padding: 0;
@@ -28,6 +30,7 @@ html {
       flex-direction: column;
       align-items: center;
       margin: 4rem auto auto auto;
+
       .menu_category {
         display: flex;
         justify-content: space-between;
@@ -114,6 +117,22 @@ html {
             justify-content: center;
             font-size: 1rem;
             color: var(--text);
+          }
+        }
+      }
+      @include smallerMobile {
+        h1 {
+          font-size: 1.5rem;
+        }
+        .input_box {
+          width: 95%;
+        }
+        .post_list {
+          .post_item {
+            width: 95%;
+            h1 {
+              margin-left: 5px;
+            }
           }
         }
       }

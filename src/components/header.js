@@ -65,7 +65,7 @@ const Header = ({ siteTitle, searchRefHandler, headerActive }) => {
   };
   console.log(headerActive);
   return (
-    <header className={headerActive}>
+    <header>
       <div className="title_container">
         <Link to="/" className="title">
           <img src={profile1} alt="Home" />

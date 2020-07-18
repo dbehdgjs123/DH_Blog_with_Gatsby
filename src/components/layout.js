@@ -47,7 +47,7 @@ const Layout = ({ children, searchRefHandler }) => {
     pageY > window.innerHeight ? setLinkTop("active") : setLinkTop("");
   };
   const onTopHandler = () => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -56,7 +56,6 @@ const Layout = ({ children, searchRefHandler }) => {
         <Header
           siteTitle={data.site.siteMetadata.title}
           searchRefHandler={searchRefHandler}
-          headerActive={headerActive}
         />
       </div>
       <div className={`link-top ${linkTop}`} onClick={onTopHandler}>
