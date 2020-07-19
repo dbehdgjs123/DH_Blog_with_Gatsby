@@ -15,6 +15,9 @@ html {
     text-decoration: none;
     color: $dgray;
   }
+  div {
+    outline: none;
+  }
   body {
     min-height: 100%; //최소 높이값으로 설정해야 스크롤할때도 100%가 된다.
     margin: 0;
@@ -35,13 +38,14 @@ html {
         display: flex;
         justify-content: space-between;
         width: 170px;
-        a {
+        div {
           cursor: pointer;
           font-size: 1.5rem;
           padding: 10px 10px;
-
           color: var(--subtitle);
+
           &.active {
+            font-weight: bold;
             color: var(--title);
             border-bottom: 2px solid var(--title);
           }
@@ -78,6 +82,9 @@ html {
           border-bottom: 1px solid var(--line);
           display: flex;
           align-items: center;
+          &.hidden {
+            display: none;
+          }
           p {
             font-size: 0.9rem;
             padding-left: 15px;
@@ -103,6 +110,7 @@ html {
               padding: 5px;
               border-radius: 8px;
               font-size: 1rem;
+              font-weight: bold;
               background-color: var(--btn);
               color: white;
               &:hover {

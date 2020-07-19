@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect, useContext, useMemo } from "react";
-import { Link } from "gatsby";
-import { FaSearch, FaTags } from "react-icons/fa";
+import React, { useState, useRef, useEffect } from "react";
+//import { Link } from "gatsby";
+import { FaSearch } from "react-icons/fa";
 import Layout from "../components/layout";
 import PostItem from "../components/postitem"; // 전체 글목록
 import "./styles/index.scss"; //페이지 전체에 적용해야할 스타일
@@ -27,12 +27,24 @@ const IndexPage = ({ data }) => {
     <Layout searchRefHandler={searchRefHandler}>
       <div className="main_container">
         <div className="menu_category">
-          <a className={menuSelect ? "" : "active"} onClick={onSelectMenu}>
+          <div
+            className={menuSelect ? "" : "active"}
+            role="button"
+            tabIndex="0"
+            onKeyDown={onSelectMenu}
+            onClick={onSelectMenu}
+          >
             개발
-          </a>
-          <a className={menuSelect ? "active" : ""} onClick={onSelectMenu}>
+          </div>
+          <div
+            className={menuSelect ? "active" : ""}
+            role="button"
+            tabIndex="0"
+            onKeyDown={onSelectMenu}
+            onClick={onSelectMenu}
+          >
             일상
-          </a>
+          </div>
         </div>
         <div className="input_box">
           <input

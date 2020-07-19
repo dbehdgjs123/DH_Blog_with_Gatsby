@@ -75,17 +75,20 @@ $dgray: #2c2d31;
       text-decoration: none;
       font-weight: bold;
       font-size: 1.5625rem;
+      transition: font-size 0.4s ease-in-out;
     }
     img {
-      height: 85px;
+      height: 90px;
       margin-right: 3px;
       padding: 3px;
       border-radius: 50%;
       border: 3px solid var(--btn2);
+      transition: height 0.4s ease-in-out;
     }
     span {
       color: var(--subtitle);
-      font-size: 0.875rem;
+      font-size: 1.5rem;
+      transition: font-size 0.4s ease-in-out;
     }
 
     .title_container {
@@ -97,20 +100,29 @@ $dgray: #2c2d31;
         height: 100%;
         margin-left: 20px;
         .title_text {
-          color: var(--title);
+          color: var(--blogtitle);
+          font-family: "Nanum Pen Script", cursive;
+          font-size: 2.5rem;
+          display: flex;
+          flex-direction: column;
+          transition: font-size 0.4s ease-in-out;
+          @include mobile {
+            font-size: 2rem;
+          }
         }
       }
       .about_btn {
-        font-size: 0.6rem;
+        font-family: "Nanum Pen Script", cursive;
+        font-size: 1.1rem;
         font-weight: 500;
         margin-left: 10px;
         border-radius: 5px;
-        padding: 5px;
+        padding: 3px;
         background-color: var(--btn2);
         color: white;
 
         position: relative;
-        top: 6px;
+        //top: 0px;
         &:hover {
           transition: all 0.4s ease-out;
           background-color: var(--active);
@@ -145,7 +157,7 @@ $dgray: #2c2d31;
           display: none;
           margin-top: 5px;
           color: var(--btn2);
-          font-size: 20px;
+
           &.hidden {
             //display 속성은 트랜지션의 영향을 받지 않기 때문에 opacity로 관리
             @include hide_sns(); //시간차 애니메이션
@@ -163,20 +175,22 @@ $dgray: #2c2d31;
       margin-right: 20px;
       display: flex;
       svg {
-        margin-top: 30px;
+        margin-top: 10px;
         color: $lgray;
 
         &:hover {
-          transition: color 0.8s ease-out;
+          transition: color 0.5s ease-out;
           color: var(--active);
         }
       }
 
       .right_menu_theme {
         margin-right: 40px;
+        font-size: 1.5625rem;
       }
       .right_menu_tag {
         position: relative;
+        font-size: 1.5625rem;
         margin-right: 40px;
         display: flex;
         justify-content: center;
@@ -218,9 +232,13 @@ $dgray: #2c2d31;
       @include mobile {
         .right_menu_theme {
           margin-right: 20px;
+          font-size: 1.1rem;
+          transition: font-size 0.4s ease-in-out;
         }
         .right_menu_tag {
           margin-right: 20px;
+          font-size: 1.1rem;
+          transition: font-size 0.4s ease-in-out;
         }
       }
     }
@@ -228,12 +246,16 @@ $dgray: #2c2d31;
       a {
         font-size: 1.1rem;
       }
+
       img {
         height: 60px;
+        transition: height 0.4s ease-in-out;
       }
+
       span {
-        font-size: 0.7rem;
+        font-size: 1rem;
       }
+
       .about_btn {
         display: none;
       }

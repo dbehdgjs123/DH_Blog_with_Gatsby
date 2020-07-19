@@ -1,5 +1,5 @@
-import React, { useReducer, createContext, useEffect } from "react";
-import { Helmet } from "react-helmet";
+import React, { useReducer, createContext } from "react";
+//import { Helmet } from "react-helmet";
 
 export const GlobalStateContext = createContext();
 export const GlobalDispatchContext = createContext();

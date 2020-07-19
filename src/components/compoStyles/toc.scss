@@ -16,9 +16,11 @@ $lwhite: #f2f3f7;
     width: 200px;
     span {
       font-weight: bold;
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: $gray;
-      border-bottom: 1px solid $gray;
+      .toc_mark {
+        font-size: 0.8rem;
+      }
     }
   }
   @media (max-width: 1250px) {

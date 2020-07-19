@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./compoStyles/toc.scss";
 import styled from "styled-components";
 import "../pages/them-color.scss";
+import { FaBookmark } from "react-icons/fa";
 const Box = styled.div`
     
     & ul {
@@ -13,6 +14,7 @@ const Box = styled.div`
     a[href="${props => props.headerUrl}"] {
       color: var(--active); /*props로 받은 주소값과 같으면 스타일 변경*/
       font-size:1.2rem;
+      font-weight: bold;
       transition: all 0.1s linear;
     }
     a:hover {
@@ -26,7 +28,10 @@ function TOC({ post, headerUrl }) {
   const tocItem =
     post.tableOfContents !== "" ? (
       <div>
-        <span>TOC</span>
+        <span>
+          <FaBookmark className="toc_mark" />
+          &nbsp; TOC
+        </span>
         <Box
           dangerouslySetInnerHTML={{ __html: post.tableOfContents }}
           headerUrl={headerUrl}

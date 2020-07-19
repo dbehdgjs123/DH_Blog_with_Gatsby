@@ -5,20 +5,18 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { memo, useEffect } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import { AiOutlineVerticalAlignTop } from "react-icons/ai";
-import GlobalContextProvider from "../context/GlobalContextProvider";
-
 import Header from "./header";
 import "./compoStyles/layout.scss";
-import { useState } from "react";
 
 const Layout = ({ children, searchRefHandler }) => {
   const [headerActive, setHeaderActive] = useState("");
   const [linkTop, setLinkTop] = useState("");
-  let pageY; //스크롤을 올렸는지 내렸는지 알기 위해 사용
+  const [pageY, setPageY] = useState(0); //스크롤을 올렸는지 내렸는지 알기 위해 사용
+
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -28,27 +26,30 @@ const Layout = ({ children, searchRefHandler }) => {
       }
     }
   `);
+  const scrollMove = useCallback(() => {
+    window.scrollY - pageY > 0
+      ? setHeaderActive("hidden")
+      : setHeaderActive("");
+    setPageY(window.scrollY);
+  }, [pageY]);
+
+  const activeTop = useCallback(() => {
+    pageY > window.innerHeight ? setLinkTop("active") : setLinkTop("");
+  }, [pageY]);
+
+  const onTopHandler = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", scrollMove);
     window.addEventListener("scroll", activeTop);
+
     return () => {
       window.removeEventListener("scroll", scrollMove);
       window.removeEventListener("scroll", activeTop);
     }; //메모리 누수 방지
-  }, []);
-  const scrollMove = () => {
-    window.scrollY - pageY > 0
-      ? setHeaderActive("hidden")
-      : setHeaderActive("");
-    pageY = window.scrollY;
-  };
-  const activeTop = () => {
-    pageY > window.innerHeight ? setLinkTop("active") : setLinkTop("");
-  };
-  const onTopHandler = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  }, [scrollMove, activeTop]);
 
   return (
     <>
@@ -58,7 +59,13 @@ const Layout = ({ children, searchRefHandler }) => {
           searchRefHandler={searchRefHandler}
         />
       </div>
-      <div className={`link-top ${linkTop}`} onClick={onTopHandler}>
+      <div
+        className={`link-top ${linkTop}`}
+        role="button"
+        tabIndex="0"
+        onKeyDown={onTopHandler}
+        onClick={onTopHandler}
+      >
         <AiOutlineVerticalAlignTop />
       </div>
 

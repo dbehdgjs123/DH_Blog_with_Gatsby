@@ -5,7 +5,7 @@ import "./blog-post.scss";
 import TOC from "../components/toc";
 import kebabCase from "lodash/kebabCase";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { Disqus, CommentCount } from "gatsby-plugin-disqus";
+//import { Disqus, CommentCount } from "gatsby-plugin-disqus";
 
 //마크다운파일을 사용할 템플릿. 여기서 마크다운파일들이 실행됨.
 function BlogPost({ pageContext, data }) {
@@ -13,11 +13,11 @@ function BlogPost({ pageContext, data }) {
   const post = data.markdownRemark;
   const { next, previous } = pageContext;
 
-  let disqusConfig = {
+  /*let disqusConfig = {
     url: `http://localhost:8000${post.fields.slug}`,
     identifier: post.fields.slug,
     title: post.frontmatter.title,
-  };
+  };*/
   const nextPage =
     next !== null ? (
       <Link to={next.fields.slug}>

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import kebabCase from "lodash/kebabCase";
+import { useState } from "react";
+import { useCallback } from "react";
 
 function PostItem({ category, searchData }) {
   //일상 카테고리와 그렇지 않을때의 쿼리를 나눔.
@@ -50,6 +52,19 @@ function PostItem({ category, searchData }) {
       }
     `
   );
+  const [postNumber, setPostNumber] = useState(2);
+  let pN = 0; //검색되었을때 중복되어서 안보이면 안되므로 선언.
+
+  const scrollBotton = useCallback(() => {
+    const { innerHeight } = window; //윈도우창크기
+    const { scrollHeight } = document.body; //바디의 크기
+    const scrollTop = window.scrollY || document.documentElement.scrollTop; //현재 스크롤 위치
+    if (scrollHeight - innerHeight - scrollTop < 100) {
+      //아래 쪽까지의 높이가 100이하이면 액티브
+      setPostNumber(postNumber + 2);
+    }
+  }, [postNumber]);
+
   const itemes = !category
     ? data.development.edges
         .map(({ node }) => {
@@ -60,7 +75,15 @@ function PostItem({ category, searchData }) {
               .includes(searchData.toLowerCase().replace(/ /gi, "")) //검색창에 치는 글자가 포함되면 렌더링
           ) {
             return (
-              <div className="post_item" key={node.id}>
+              <div
+                className={`post_item ${
+                  pN <= postNumber ? "active" : "hidden"
+                }`}
+                key={node.id}
+              >
+                {/* pn이 현재 액티브 되야할 포스트넘버보다 작으면 출력 x pn은 map수만큼 ++ */}
+                {pN++}
+
                 <Link to={node.fields.slug}>
                   <div>
                     {/*그래프쿼리를 map으로 순회한 글들을 반환*/}
@@ -124,6 +147,11 @@ function PostItem({ category, searchData }) {
         .filter(n => n);
   console.log(itemes);
   console.log(searchData);
+
+  useEffect(() => {
+    window.addEventListener("scroll", scrollBotton);
+    return () => window.removeEventListener("scroll", scrollBotton); //메모리 누수 방지
+  }, [scrollBotton]);
 
   return (
     <>

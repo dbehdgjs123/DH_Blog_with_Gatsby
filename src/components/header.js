@@ -71,7 +71,6 @@ const Header = ({ siteTitle, searchRefHandler, headerActive }) => {
           <img src={profile1} alt="Home" />
           <div className="title_text">
             {siteTitle}
-            <br />
             <span>시작이 반이다.</span>
           </div>
         </Link>
@@ -84,32 +83,57 @@ const Header = ({ siteTitle, searchRefHandler, headerActive }) => {
           <FaAngleDown />
         </button>
         <div className="contect_sns_list">
-          <a className={`${sns} ${snsTransition}`}>
+          <a
+            className={`${sns} ${snsTransition}`}
+            href="https://www.instagram.com/yu_dongheon/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaInstagram />
           </a>
-          <a className={`${sns} ${snsTransition}`}>
+          <a
+            className={`${sns} ${snsTransition}`}
+            href="https://github.com/dbehdgjs123"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaGithub />
           </a>
-          <a className={`${sns} ${snsTransition}`}>
+          <a
+            className={`${sns} ${snsTransition}`}
+            href="https://www.facebook.com/profile.php?id=100006436004409"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaFacebook />
           </a>
         </div>
       </div>
       <div className="right_menu">
-        <a
+        <div
           className="right_menu_theme"
-          type="button"
+          role="button"
+          tabIndex="0"
           onClick={() => {
+            dispath({ type: "TOGGLE_THEME" });
+          }}
+          onKeyDown={() => {
             dispath({ type: "TOGGLE_THEME" });
           }}
         >
           {state.theme === "light" ? <FaSun /> : <FaMoon />}
-        </a>
+        </div>
 
         <div className="right_menu_tag">
-          <a onClick={showTag} className={tagMenu}>
+          <div
+            role="button"
+            tabIndex="0"
+            onClick={showTag}
+            onKeyDown={showTag}
+            className={tagMenu}
+          >
             <FaTags />
-          </a>
+          </div>
           <TagList transition={tagTransition} tagState={tagMenu} />
         </div>
         <Link to="/" onClick={focusSearch}>
