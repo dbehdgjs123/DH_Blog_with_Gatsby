@@ -5,9 +5,14 @@
  */
 
 // You can delete this file if you're not using it
-const React = require("react");
+import React from "react";
+import GlobalContextProvider from "./src/context/GlobalContextProvider";
 
-exports.onRenderBody = ({ setPreBodyComponents }) => {
+export const wrapRootElement = ({ element }) => {
+  return <GlobalContextProvider>{element}</GlobalContextProvider>;
+};
+
+export const onRenderBody = ({ setPreBodyComponents }) => {
   setPreBodyComponents([
     React.createElement("script", {
       key: "theme",
