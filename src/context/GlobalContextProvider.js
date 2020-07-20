@@ -22,6 +22,8 @@ function getInitialColor() {
     }
 
     return "light"; //아무것도 아니면 기본인 light를 테마로 사용한다.
+  } else {
+    return "light";
   }
 }
 const initialState = {
