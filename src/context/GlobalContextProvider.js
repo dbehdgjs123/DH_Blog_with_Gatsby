@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 export const GlobalStateContext = createContext();
 export const GlobalDispatchContext = createContext();
 
-function getInitialColor() {
+/*function getInitialColor() {
   if (typeof window !== `undefined`) {
     const themeColor = window.localStorage.getItem("themeColor"); //로컬 스토리지에서 theme키를 가져온다.
     const hasThemeColor = typeof themeColor === "string";
@@ -25,9 +25,10 @@ function getInitialColor() {
   } else {
     return "light";
   }
-}
+}*/
+
 const initialState = {
-  theme: getInitialColor(),
+  theme: typeof window !== "undefined" ? window.__theme : "light",
 };
 function reducer(state, action) {
   switch (action.type) {
