@@ -15,6 +15,7 @@ exports.wrapRootElement = ({ element }) => {
 exports.onRenderBody = ({ setPreBodyComponents }) => {
   setPreBodyComponents([
     React.createElement("script", {
+      key: "theme",
       dangerouslySetInnerHTML: {
         __html: `(() => {
           function setTheme(newTheme) {
