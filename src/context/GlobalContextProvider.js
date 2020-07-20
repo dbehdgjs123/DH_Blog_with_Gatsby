@@ -1,4 +1,5 @@
 import React, { useReducer, createContext } from "react";
+import PropTypes from "prop-types";
 //import { Helmet } from "react-helmet";
 
 export const GlobalStateContext = createContext();
@@ -53,5 +54,8 @@ function GlobalContextProvider({ children }) {
     </GlobalStateContext.Provider>
   );
 }
+GlobalContextProvider.propTypes = {
+  children: PropTypes.any,
+};
 
 export default GlobalContextProvider;
