@@ -4,6 +4,8 @@ import { FaSearch } from "react-icons/fa";
 import Layout from "../components/layout";
 import PostItem from "../components/postitem"; // 전체 글목록
 import "./styles/index.scss"; //페이지 전체에 적용해야할 스타일
+import SEO from "../components/seo";
+import { graphql } from "gatsby";
 
 const IndexPage = ({ data }) => {
   const [menuSelect, setMenuSelect] = useState(false);
@@ -25,6 +27,10 @@ const IndexPage = ({ data }) => {
   };
   return (
     <Layout searchRefHandler={searchRefHandler}>
+      <SEO
+        title={data.site.siteMetadata.title}
+        description={data.site.siteMetadata.description}
+      />
       <div className="main_container">
         <div className="menu_category">
           <div
@@ -65,3 +71,14 @@ const IndexPage = ({ data }) => {
 };
 
 export default IndexPage;
+
+export const query = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+        description
+      }
+    }
+  }
+`;

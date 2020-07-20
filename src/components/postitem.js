@@ -52,7 +52,7 @@ function PostItem({ category, searchData }) {
       }
     `
   );
-  const [postNumber, setPostNumber] = useState(2);
+  const [postNumber, setPostNumber] = useState(10);
   let pN = 0; //검색되었을때 중복되어서 안보이면 안되므로 선언.
 
   const scrollBotton = useCallback(() => {
@@ -61,7 +61,7 @@ function PostItem({ category, searchData }) {
     const scrollTop = window.scrollY || document.documentElement.scrollTop; //현재 스크롤 위치
     if (scrollHeight - innerHeight - scrollTop < 100) {
       //아래 쪽까지의 높이가 100이하이면 액티브
-      setPostNumber(postNumber + 2);
+      setPostNumber(postNumber + 10);
     }
   }, [postNumber]);
 
@@ -74,6 +74,7 @@ function PostItem({ category, searchData }) {
               .replace(/ /gi, "") //공백제거
               .includes(searchData.toLowerCase().replace(/ /gi, "")) //검색창에 치는 글자가 포함되면 렌더링
           ) {
+            pN++; //pn이 현재 액티브 되야할 포스트넘버보다 작으면 출력 x pn은 map수만큼 ++
             return (
               <div
                 className={`post_item ${
@@ -81,9 +82,6 @@ function PostItem({ category, searchData }) {
                 }`}
                 key={node.id}
               >
-                {/* pn이 현재 액티브 되야할 포스트넘버보다 작으면 출력 x pn은 map수만큼 ++ */}
-                {pN++}
-
                 <Link to={node.fields.slug}>
                   <div>
                     {/*그래프쿼리를 map으로 순회한 글들을 반환*/}

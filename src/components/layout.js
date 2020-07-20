@@ -22,6 +22,7 @@ const Layout = ({ children, searchRefHandler }) => {
       site {
         siteMetadata {
           title
+          description
         }
       }
     }
@@ -56,6 +57,7 @@ const Layout = ({ children, searchRefHandler }) => {
       <div className={`header-container ${headerActive}`}>
         <Header
           siteTitle={data.site.siteMetadata.title}
+          siteDescription={data.site.siteMetadata.description}
           searchRefHandler={searchRefHandler}
         />
       </div>

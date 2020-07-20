@@ -5,6 +5,8 @@ import "./blog-post.scss";
 import TOC from "../components/toc";
 import kebabCase from "lodash/kebabCase";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import SEO from "../components/seo";
+
 //import { Disqus, CommentCount } from "gatsby-plugin-disqus";
 
 //마크다운파일을 사용할 템플릿. 여기서 마크다운파일들이 실행됨.
@@ -58,6 +60,7 @@ function BlogPost({ pageContext, data }) {
     let checkpoint;
     const currentOffsetY = window.pageYOffset;
     const headerElements = document.querySelectorAll(".anchor-header");
+
     for (const item of headerElements) {
       const { top } = item.getBoundingClientRect();
       const elemTop = top + currentOffsetY;
@@ -82,6 +85,11 @@ function BlogPost({ pageContext, data }) {
   ));
   return (
     <Layout>
+      <SEO
+        title={post.frontmatter.title}
+        description={post.excerpt}
+        keyword={post.frontmatter.tags}
+      />
       <div className="blog-post-container">
         <div className="blog-post-title">
           <h1>{post.frontmatter.title}</h1>
@@ -119,6 +127,7 @@ export const query = graphql`
         date(formatString: "YYYY-MM-DD")
         tags
       }
+      excerpt
     }
   }
 `;

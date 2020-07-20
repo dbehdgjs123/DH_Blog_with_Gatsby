@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: `Dev.Yu BLOG`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    description: `주저말고 시작을`,
+    author: `YuDongHeon`,
+    lang: `ko-KR`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -17,7 +18,6 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-styled-components`,
-    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -46,7 +46,7 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-
+    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
@@ -63,6 +63,18 @@ module.exports = {
       resolve: `gatsby-plugin-disqus`,
       options: {
         shortname: `devdh`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `YULOG`,
+        short_name: `YULOG`,
+        start_url: `/`,
+        background_color: `#6b37bf`,
+        theme_color: `#6b37bf`,
+        display: `standalone`,
+        icon: `src/images/gatsby-icon.png`,
       },
     },
 

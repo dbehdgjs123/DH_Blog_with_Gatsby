@@ -19,7 +19,12 @@ import {
   GlobalStateContext,
 } from "../context/GlobalContextProvider";
 
-const Header = ({ siteTitle, searchRefHandler, headerActive }) => {
+const Header = ({
+  siteTitle,
+  siteDescription,
+  searchRefHandler,
+  headerActive,
+}) => {
   const [sns, setSns] = useState("");
   const [snsTransition, setSnsTransition] = useState("hidden");
 
@@ -71,7 +76,7 @@ const Header = ({ siteTitle, searchRefHandler, headerActive }) => {
           <img src={profile1} alt="Home" />
           <div className="title_text">
             {siteTitle}
-            <span>시작이 반이다.</span>
+            <span>{siteDescription}</span>
           </div>
         </Link>
         <Link to="/" className="about_btn">
