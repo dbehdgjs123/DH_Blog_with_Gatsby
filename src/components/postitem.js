@@ -143,9 +143,6 @@ function PostItem({ category, searchData }) {
           }
         })
         .filter(n => n);
-  console.log(itemes);
-  console.log(searchData);
-
   useEffect(() => {
     window.addEventListener("scroll", scrollBotton);
     return () => window.removeEventListener("scroll", scrollBotton); //메모리 누수 방지

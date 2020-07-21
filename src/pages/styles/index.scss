@@ -26,6 +26,7 @@ html {
     h1 {
       color: var(--title);
     }
+    transition: all 0.3s ease-in-out 0s;
     .main_container {
       max-width: 720px;
       display: flex;

@@ -4,6 +4,7 @@ module.exports = {
     description: `주저말고 시작을`,
     author: `YuDongHeon`,
     lang: `ko-KR`,
+    url: `https://dev-yu.netlify.app`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
