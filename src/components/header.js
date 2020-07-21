@@ -72,7 +72,7 @@ const Header = ({
   return (
     <header>
       <div className="title_container">
-        <Link to="/" className="title">
+        <Link to="/" className="title" state={{ searchFocus: false }}>
           <img src={profile1} alt="Home" />
           <div className="title_text">
             {siteTitle}
@@ -141,7 +141,7 @@ const Header = ({
           </div>
           <TagList transition={tagTransition} tagState={tagMenu} />
         </div>
-        <Link to="/" onClick={focusSearch}>
+        <Link to="/" onClick={focusSearch} state={{ searchFocus: true }}>
           <FaSearch />
         </Link>
       </div>
