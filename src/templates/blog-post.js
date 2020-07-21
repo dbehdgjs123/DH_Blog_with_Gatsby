@@ -7,7 +7,7 @@ import kebabCase from "lodash/kebabCase";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import SEO from "../components/seo";
 
-import { Disqus, CommentCount } from "gatsby-plugin-disqus";
+import { Disqus } from "gatsby-plugin-disqus";
 
 //마크다운파일을 사용할 템플릿. 여기서 마크다운파일들이 실행됨.
 function BlogPost({ pageContext, data }) {

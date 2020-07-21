@@ -17,6 +17,7 @@ export const onRenderBody = ({ setPreBodyComponents }) => {
           function setTheme(newTheme) {
             preferredTheme = newTheme;
             document.body.className = newTheme;
+            document.body.style.transition = "all 0s";
             window.__theme = newTheme;
           }
           let preferredTheme
