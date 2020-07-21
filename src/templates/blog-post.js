@@ -17,8 +17,8 @@ function BlogPost({ pageContext, data }) {
   const { next, previous } = pageContext;
 
   let disqusConfig = {
-    url: `${config.url + post.fields.slug}`,
-    identifier: post.fields.slug,
+    url: `${config.siteMetadata.url + post.fields.slug}`,
+    identifier: post.id,
     title: post.frontmatter.title,
   };
   const nextPage =
@@ -134,6 +134,7 @@ export const query = graphql`
         date(formatString: "YYYY-MM-DD")
         tags
       }
+      id
       excerpt
     }
   }
