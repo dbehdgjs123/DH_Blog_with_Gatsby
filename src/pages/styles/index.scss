@@ -22,7 +22,6 @@ html {
     min-height: 100%; //최소 높이값으로 설정해야 스크롤할때도 100%가 된다.
     margin: 0;
     padding: 0;
-    transition: all 0.5s ease-in-out;
     background-color: var(--bg);
     h1 {
       color: var(--title);

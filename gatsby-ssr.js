@@ -8,16 +8,12 @@
 import React from "react";
 import GlobalContextProvider from "./src/context/GlobalContextProvider";
 
-export const wrapRootElement = ({ element }) => {
-  return <GlobalContextProvider>{element}</GlobalContextProvider>;
-};
-
 export const onRenderBody = ({ setPreBodyComponents }) => {
   setPreBodyComponents([
     React.createElement("script", {
       key: "theme",
       dangerouslySetInnerHTML: {
-        __html: `(() => {
+        __html: `(function() {
           function setTheme(newTheme) {
             preferredTheme = newTheme;
             document.body.className = newTheme;
@@ -28,7 +24,7 @@ export const onRenderBody = ({ setPreBodyComponents }) => {
             preferredTheme = localStorage.getItem('themeColor')
           } catch (err) {}
 
-          window.__setPreferredTheme = newTheme => {
+          window.__setPreferredTheme = function (newTheme) {
             setTheme(newTheme)
             try {
               localStorage.setItem('themeColor',newTheme)
@@ -40,8 +36,12 @@ export const onRenderBody = ({ setPreBodyComponents }) => {
             })
 
             setTheme(preferredTheme || (darkQuery.matches ? 'light' : 'dark'))
-        })()`,
+        })();`,
       },
     }),
   ]);
+};
+
+export const wrapRootElement = ({ element }) => {
+  return <GlobalContextProvider>{element}</GlobalContextProvider>;
 };
