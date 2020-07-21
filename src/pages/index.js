@@ -13,12 +13,16 @@ const IndexPage = ({ data, location }) => {
   const searchRef = useRef();
 
   useEffect(() => {
-    if (location.state.searchFocus === false) {
+    if (location.state == null) {
+      console.log(location);
       return; //location으로 온값이 true일때만 ref를 사용한다.
     } else {
-      searchRef.current.focus();
+      if (location.state.searchFocus === true) searchRef.current.focus();
+      else {
+        return;
+      }
     }
-  }, [location.state.searchFocus]);
+  }, [location]);
 
   const onSelectMenu = () => {
     setMenuSelect(!menuSelect); //false 일땐 개발에 체크, 그렇지 않을땐 일상이 되어있게함.
