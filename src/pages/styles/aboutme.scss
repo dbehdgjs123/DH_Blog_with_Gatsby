@@ -1,31 +1,28 @@
 @import "../them-color.scss";
 @import "../../components/compoStyles/media.scss";
-body {
-  height: 100%;
-  #___gatsby,
-  #gatsby-focus-wrapper {
-    height: 100%;
+
+.about-container {
+  .about-text {
+    //화면 중앙정렬
+    position: fixed;
+    height: 150px;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    //글자간 중앙정렬
     display: flex;
     flex-direction: column;
-    main {
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .about-container {
-        font-family: "Nanum Myeongjo", cursive;
-        height: 150px;
-        color: var(--title);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 1.7rem;
-        text-align: center;
-        @include mobile {
-          font-size: 1.1rem;
-        }
-      }
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    color: var(--title);
+    font-size: 1.7rem;
+    font-family: "Nanum Myeongjo", cursive;
+
+    @include mobile {
+      font-size: 1rem;
     }
   }
 }
