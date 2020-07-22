@@ -25,7 +25,7 @@ $dgray: #2c2d31;
     margin-bottom: -30px;
   }
 }
-@mixin show_sns($from: 1, $through: 3) {
+@mixin show_sns($from: 1, $through: 4) {
   @for $i from $from through $through {
     &:nth-child(#{$i}) {
       animation-name: slide;
@@ -35,7 +35,7 @@ $dgray: #2c2d31;
     }
   }
 }
-@mixin hide_sns($from: 1, $through: 3, $hideSpeed: 0.3) {
+@mixin hide_sns($from: 1, $through: 4, $hideSpeed: 0.3) {
   $num: $hideSpeed;
   @for $i from $from through $through {
     animation-name: slideout;
@@ -232,19 +232,19 @@ $dgray: #2c2d31;
       @include mobile {
         .right_menu_theme {
           margin-right: 20px;
-          font-size: 1.1rem;
+          font-size: 1.3rem;
           transition: font-size 0.4s ease-in-out;
         }
         .right_menu_tag {
           margin-right: 20px;
-          font-size: 1.1rem;
+          font-size: 1.3rem;
           transition: font-size 0.4s ease-in-out;
         }
       }
     }
     @include mobile {
       a {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
       }
 
       img {
@@ -262,8 +262,9 @@ $dgray: #2c2d31;
       .contect_sns {
         bottom: 0px;
         margin-left: 40px;
-      }
-      header {
+        a {
+          font-size: 1.4rem;
+        }
       }
     }
   }

@@ -11,6 +11,7 @@ import {
   FaSun,
   FaMoon,
   FaAngleDown,
+  FaUserCircle,
 } from "react-icons/fa";
 import "./compoStyles/header.scss";
 import TagList from "./taglist";
@@ -79,7 +80,7 @@ const Header = ({
             <span>{siteDescription}</span>
           </div>
         </Link>
-        <Link to="/" className="about_btn">
+        <Link to="/aboutme" className="about_btn">
           About me
         </Link>
       </div>
@@ -112,6 +113,9 @@ const Header = ({
           >
             <FaFacebook />
           </a>
+          <Link to="/aboutme" className={`${sns} ${snsTransition}`}>
+            <FaUserCircle />
+          </Link>
         </div>
       </div>
       <div className="right_menu">
