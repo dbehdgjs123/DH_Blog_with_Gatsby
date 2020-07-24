@@ -18,6 +18,14 @@ html {
   div {
     outline: none;
   }
+  .gatsby-highlight {
+    background-color: #222325;
+    border-radius: 1.25rem;
+    pre[class*="language-"] {
+      background-color: #222325;
+      border-radius: 1em;
+    }
+  }
   body {
     min-height: 100%; //최소 높이값으로 설정해야 스크롤할때도 100%가 된다.
     margin: 0;
@@ -25,6 +33,7 @@ html {
     background-color: var(--bg);
     h1 {
       color: var(--title);
+      font-size: 1.8rem;
     }
     transition: all 0.2s ease-in-out 0s;
     .main_container {

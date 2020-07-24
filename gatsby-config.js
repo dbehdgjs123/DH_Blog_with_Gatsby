@@ -29,7 +29,17 @@ module.exports = {
               className: `anchor-header`, //지정된 링크를 하이라이트하기위해 설정
               maintainCase: false, //url이 대소문자를 구분하기 때문에 링크가 작동하지 않을 수 있다.
               removeAccents: true,
-              elements: [`h2`, "h3", `h4`],
+              elements: [`h2`, `h3`, `h4`],
+            },
+          },
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: "language-",
+              inlineCodeMarker: null,
+              aliases: {},
+              showLineNumbers: true,
+              noInlineHighlight: false,
             },
           },
         ],

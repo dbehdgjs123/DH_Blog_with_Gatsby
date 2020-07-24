@@ -69,7 +69,6 @@ const Header = ({
       return;
     }
   };
-  console.log(headerActive);
   return (
     <header>
       <div className="title_container">
