@@ -12,15 +12,11 @@ import { Disqus } from "gatsby-plugin-disqus";
 //마크다운파일을 사용할 템플릿. 여기서 마크다운파일들이 실행됨.
 function BlogPost({ pageContext, data }) {
   const [tocHighlight, setTocHighlight] = useState(undefined);
+  const [disqusconfig, setDisqusconfig] = useState(undefined);
   const post = data.markdownRemark;
   const { config } = data;
   const { next, previous } = pageContext;
 
-  let disqusConfig = {
-    url: `${config.siteMetadata.url + post.fields.slug}`,
-    identifier: post.id,
-    title: post.frontmatter.title,
-  };
   const nextPage =
     next !== null ? (
       <Link to={next.fields.slug}>
@@ -55,8 +51,18 @@ function BlogPost({ pageContext, data }) {
 
   useEffect(() => {
     window.addEventListener("scroll", onScrollHandler);
+    setDisqusconfig({
+      url: `${config.siteMetadata.url + post.fields.slug}`,
+      identifier: post.id,
+      title: post.frontmatter.title,
+    });
     return () => window.removeEventListener("scroll", onScrollHandler); //메모리 누수 방지
-  }, []);
+  }, [
+    config.siteMetadata.url,
+    post.fields.slug,
+    post.id,
+    post.frontmatter.title,
+  ]);
   const onScrollHandler = e => {
     let checkpoint;
     const currentOffsetY = window.pageYOffset;
@@ -107,7 +113,7 @@ function BlogPost({ pageContext, data }) {
           <div className="other-page-prevbox">{prevPage}</div>
           <div className="other-page-nextbox">{nextPage}</div>
         </div>
-        <Disqus config={disqusConfig} />
+        <Disqus config={disqusconfig} />
         <TOC post={post} headerUrl={tocHighlight} />
       </div>
     </Layout>
