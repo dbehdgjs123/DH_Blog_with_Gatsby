@@ -12,3 +12,12 @@ import "prismjs/themes/prism-solarizedlight.css";
 export const wrapRootElement = ({ element }) => {
   return <GlobalContextProvider>{element}</GlobalContextProvider>;
 };
+
+export const onServiceWorkerUpdateReady = () => {
+  const answer = window.confirm(
+    `어플리케이션이 업데이트 되었습니다. ` + `새로고침 하시겠습니까?`
+  );
+  if (answer === true) {
+    window.location.reload();
+  }
+};
