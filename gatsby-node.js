@@ -14,10 +14,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === "MarkdownRemark") {
     const slug = createFilePath({ node, getNode, basePath: "md-pages" });
+    let realSlug = slug.split("/"); //파일 경로 분리.
+    realSlug = realSlug[realSlug.length - 2]; //맨 끝 슬러그까지 분리하면 마지막에서 두번째가 실제 파일경로.
+
     createNodeField({
       node,
       name: "slug",
-      value: slug,
+      value: `/${realSlug}/`,
     });
   }
 };
