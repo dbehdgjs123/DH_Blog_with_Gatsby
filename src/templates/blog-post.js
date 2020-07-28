@@ -18,12 +18,14 @@ function BlogPost({ pageContext, data }) {
   const { next, previous } = pageContext;
 
   const nextPage =
-    next !== null ? (
-      <Link to={next.fields.slug}>
+    previous !== null ? ( //날짜를 내림차순으로 바꿔서 반대로함.
+      <Link to={previous.fields.slug}>
         <div className="other-page-next">
           <div>
             <span className="other-page-subtext">다음 포스트</span>
-            <span className="other-page-text">{next.frontmatter.title}</span>
+            <span className="other-page-text">
+              {previous.frontmatter.title}
+            </span>
           </div>
           <div className="other-page-next-right">
             <FaArrowRight />
@@ -33,17 +35,15 @@ function BlogPost({ pageContext, data }) {
     ) : null;
 
   const prevPage =
-    previous !== null ? (
-      <Link to={previous.fields.slug}>
+    next !== null ? (
+      <Link to={next.fields.slug}>
         <div className="other-page-prev">
           <div className="other-page-prev-left">
             <FaArrowLeft />
           </div>
           <div>
             <span className="other-page-subtext">이전 포스트</span>
-            <span className="other-page-text">
-              {previous.frontmatter.title}
-            </span>
+            <span className="other-page-text">{next.frontmatter.title}</span>
           </div>
         </div>
       </Link>
