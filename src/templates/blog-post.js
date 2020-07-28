@@ -56,6 +56,7 @@ function BlogPost({ pageContext, data }) {
       identifier: post.id,
       title: post.frontmatter.title,
     });
+    console.log(`${config.siteMetadata.siteUrl + post.fields.slug}`);
     return () => window.removeEventListener("scroll", onScrollHandler); //메모리 누수 방지
   }, [
     config.siteMetadata.siteUrl,
