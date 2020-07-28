@@ -52,13 +52,13 @@ function BlogPost({ pageContext, data }) {
   useEffect(() => {
     window.addEventListener("scroll", onScrollHandler);
     setDisqusconfig({
-      url: `${config.siteMetadata.url + post.fields.slug}`,
+      url: `${config.siteMetadata.siteUrl + post.fields.slug}`,
       identifier: post.id,
       title: post.frontmatter.title,
     });
     return () => window.removeEventListener("scroll", onScrollHandler); //메모리 누수 방지
   }, [
-    config.siteMetadata.url,
+    config.siteMetadata.siteUrl,
     post.fields.slug,
     post.id,
     post.frontmatter.title,
@@ -126,7 +126,7 @@ export const query = graphql`
   query($slug: String!) {
     config: site {
       siteMetadata {
-        url
+        siteUrl
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {

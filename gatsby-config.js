@@ -4,7 +4,7 @@ module.exports = {
     description: `주저말고 시작을`,
     author: `YuDongHeon`,
     lang: `ko-KR`,
-    url: `https://dev-yulog.netlify.app`,
+    siteUrl: `https://dev-yulog.netlify.app`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -19,6 +19,7 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-styled-components`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -83,6 +84,14 @@ module.exports = {
         theme_color: `#6b37bf`,
         display: `standalone`,
         icon: `src/images/gatsby-icon.png`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        host: `https://dev-yulog.netlify.app`,
+        sitemap: `https://dev-yulog.netlify.app/sitemap.xml`,
+        policy: [{ userAgent: "*", allow: "/" }],
       },
     },
     //`gatsby-plugin-offline`,
