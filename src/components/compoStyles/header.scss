@@ -70,7 +70,7 @@ $dgray: #2c2d31;
     position: relative;
     @include item_flex();
     justify-content: space-between;
-    top: 0px;
+
     a {
       text-decoration: none;
       font-weight: bold;
@@ -79,7 +79,7 @@ $dgray: #2c2d31;
     }
     img {
       height: 90px;
-      margin-right: 3px;
+
       padding: 3px;
       border-radius: 50%;
       border: 3px solid var(--btn2);
@@ -90,16 +90,21 @@ $dgray: #2c2d31;
       font-size: 1.5rem;
       transition: font-size 0.4s ease-in-out;
     }
+    .tite_img {
+      margin-left: 20px;
+      margin-right: 10px;
+      display: flex;
+      flex-direction: column;
+    }
 
     .title_container {
       position: relative;
+
       @include item_flex();
       .title {
         @include item_flex();
-        align-items: flex-end;
         max-width: 400px;
         height: 100%;
-        margin-left: 20px;
         .title_text {
           color: var(--blogtitle);
           font-family: "Nanum Pen Script", cursive;
@@ -112,31 +117,32 @@ $dgray: #2c2d31;
           }
         }
       }
-      .about_btn {
-        font-family: "Nanum Pen Script", cursive;
-        font-size: 1.1rem;
-        font-weight: 500;
-        margin-left: 10px;
-        border-radius: 5px;
-        padding: 3px;
-        background-color: var(--btn2);
-        color: white;
-
-        position: relative;
-        //top: 0px;
-        &:hover {
-          transition: all 0.4s ease-out;
-          background-color: var(--active);
+      .title_text_about_box {
+        display: flex;
+        .about_box {
+          height: 2.5rem;
+          .about_btn {
+            font-family: "Nanum Pen Script", cursive;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-left: 10px;
+            border-radius: 5px;
+            padding: 3px;
+            background-color: var(--btn2);
+            color: white;
+            position: relative;
+            line-height: 2.7rem;
+            &:hover {
+              transition: all 0.4s ease-out;
+              background-color: var(--active);
+            }
+          }
         }
       }
     }
     .contect_sns {
-      position: absolute;
-      margin-left: 20px;
-      width: 102px; //이미지와 맞춘다.
       display: flex;
       justify-content: center;
-      margin-bottom: -8rem;
       cursor: pointer;
       button {
         margin: 0 auto;
@@ -266,10 +272,7 @@ $dgray: #2c2d31;
         display: none;
       }
       .contect_sns {
-        width: 62px; //이미지와 맞춘다.
-        display: flex;
-        justify-content: center;
-        margin-bottom: -5.5rem;
+        //width: 62px; //이미지와 맞춘다.
 
         a {
           font-size: 1.4rem;

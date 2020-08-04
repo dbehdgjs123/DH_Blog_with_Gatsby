@@ -72,47 +72,54 @@ const Header = ({
   return (
     <header>
       <div className="title_container">
-        <Link to="/" className="title" state={{ searchFocus: false }}>
+        <div className="tite_img">
           <img src={profile1} alt="Home" />
-          <div className="title_text">
-            {siteTitle}
-            <span>{siteDescription}</span>
+          <div className="contect_sns">
+            <button onClick={showSns} className={sns}>
+              <FaAngleDown />
+            </button>
+
+            <div className="contect_sns_list">
+              <a
+                className={`${sns} ${snsTransition}`}
+                href="https://www.instagram.com/yu_dongheon/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaInstagram />
+              </a>
+              <a
+                className={`${sns} ${snsTransition}`}
+                href="https://github.com/dbehdgjs123"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithub />
+              </a>
+              <a
+                className={`${sns} ${snsTransition}`}
+                href="https://www.facebook.com/profile.php?id=100006436004409"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaFacebook />
+              </a>
+              <Link to="/aboutme" className={`${sns} ${snsTransition}`}>
+                <FaUserCircle />
+              </Link>
+            </div>
           </div>
-        </Link>
-        <Link to="/aboutme" className="about_btn">
-          About me
-        </Link>
-        <div className="contect_sns">
-          <button onClick={showSns} className={sns}>
-            <FaAngleDown />
-          </button>
-          <div className="contect_sns_list">
-            <a
-              className={`${sns} ${snsTransition}`}
-              href="https://www.instagram.com/yu_dongheon/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaInstagram />
-            </a>
-            <a
-              className={`${sns} ${snsTransition}`}
-              href="https://github.com/dbehdgjs123"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaGithub />
-            </a>
-            <a
-              className={`${sns} ${snsTransition}`}
-              href="https://www.facebook.com/profile.php?id=100006436004409"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaFacebook />
-            </a>
-            <Link to="/aboutme" className={`${sns} ${snsTransition}`}>
-              <FaUserCircle />
+        </div>
+        <div className="title_text_about_box">
+          <Link to="/" className="title" state={{ searchFocus: false }}>
+            <div className="title_text">
+              {siteTitle}
+              <span>{siteDescription}</span>
+            </div>
+          </Link>
+          <div className="about_box">
+            <Link to="/aboutme" className="about_btn">
+              About me
             </Link>
           </div>
         </div>
