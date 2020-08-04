@@ -54,10 +54,29 @@ body {
       h1 {
         font-size: 1.4rem;
       }
+      .tag_list_title {
+        font-size: 1.2rem;
+      }
       .tag_item {
         width: 95%;
         h1 {
           margin-left: 5px;
+        }
+        p {
+          font-size: 0.85rem;
+        }
+        .tag_item_date {
+          font-size: 0.75rem;
+        }
+        .tag_item_tag {
+          width: 100px;
+          display: flex;
+          overflow: scroll;
+          a {
+            white-space: nowrap;
+            font-size: 0.75rem;
+            margin-right: 5px;
+          }
         }
       }
     }

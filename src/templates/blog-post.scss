@@ -154,6 +154,22 @@ body {
       }
       @include smallerMobile {
         width: 95%;
+        .blog-post-title {
+          h1 {
+            font-size: 1.8rem;
+          }
+          .blog-post-subtitle {
+            span {
+              font-size: 0.75rem;
+            }
+            .blog-post-tagbox {
+              a {
+                font-size: 0.75rem;
+              }
+            }
+          }
+        }
+
         .other-page {
           flex-wrap: wrap;
           justify-content: center;

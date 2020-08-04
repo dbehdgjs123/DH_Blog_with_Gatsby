@@ -107,7 +107,7 @@ $dgray: #2c2d31;
           flex-direction: column;
           transition: font-size 0.4s ease-in-out;
           @include mobile {
-            font-size: 2rem;
+            font-size: 1.3rem;
           }
         }
       }
@@ -131,8 +131,8 @@ $dgray: #2c2d31;
     }
     .contect_sns {
       position: absolute;
-      bottom: 15px;
       margin-left: 54px;
+      bottom: 10px;
       cursor: pointer;
       button {
         font-size: 1.25rem;
@@ -232,12 +232,12 @@ $dgray: #2c2d31;
       @include mobile {
         .right_menu_theme {
           margin-right: 20px;
-          font-size: 1.3rem;
+          font-size: 1.1rem;
           transition: font-size 0.4s ease-in-out;
         }
         .right_menu_tag {
           margin-right: 20px;
-          font-size: 1.3rem;
+          font-size: 1.1rem;
           transition: font-size 0.4s ease-in-out;
         }
       }
@@ -248,12 +248,12 @@ $dgray: #2c2d31;
       }
 
       img {
-        height: 60px;
+        height: 50px;
         transition: height 0.4s ease-in-out;
       }
 
       span {
-        font-size: 1rem;
+        font-size: 0.9rem;
       }
 
       .about_btn {
@@ -261,7 +261,7 @@ $dgray: #2c2d31;
       }
       .contect_sns {
         bottom: 0px;
-        margin-left: 40px;
+        margin-left: 35px;
         a {
           font-size: 1.4rem;
         }
