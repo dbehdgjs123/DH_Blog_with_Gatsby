@@ -92,6 +92,7 @@ $dgray: #2c2d31;
     }
 
     .title_container {
+      position: relative;
       @include item_flex();
       .title {
         @include item_flex();
@@ -131,10 +132,14 @@ $dgray: #2c2d31;
     }
     .contect_sns {
       position: absolute;
-      margin-left: 54px;
-      bottom: 10px;
+      margin-left: 20px;
+      width: 102px; //이미지와 맞춘다.
+      display: flex;
+      justify-content: center;
+      margin-bottom: -8rem;
       cursor: pointer;
       button {
+        margin: 0 auto;
         font-size: 1.25rem;
         background-color: transparent;
         color: var(--btn2);
@@ -152,6 +157,7 @@ $dgray: #2c2d31;
         flex-direction: column;
         align-items: center;
         position: absolute;
+        margin-top: 1.5rem;
 
         a {
           display: none;
@@ -260,8 +266,11 @@ $dgray: #2c2d31;
         display: none;
       }
       .contect_sns {
-        bottom: 0px;
-        margin-left: 35px;
+        width: 62px; //이미지와 맞춘다.
+        display: flex;
+        justify-content: center;
+        margin-bottom: -5.5rem;
+
         a {
           font-size: 1.4rem;
         }
