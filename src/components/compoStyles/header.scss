@@ -56,16 +56,12 @@ $dgray: #2c2d31;
   &.hidden {
     z-index: -1;
     top: -180px;
-    header {
-      top: -180px;
-    }
   }
   @include mobile {
     height: 120px;
     background-color: var(--bg);
   }
   header {
-    transition: all 0.4s ease-in-out;
     height: 100%;
     position: relative;
     @include item_flex();
