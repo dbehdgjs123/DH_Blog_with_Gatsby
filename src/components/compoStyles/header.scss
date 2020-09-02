@@ -226,10 +226,10 @@ $dgray: #2c2d31;
             }
             &.hidden {
               //display 속성은 트랜지션의 영향을 받지 않기 때문에 opacity로 관리
-              @include hide_sns(1, 8, 0.5); //시간차 애니메이션
+              @include hide_sns(1, 9, 0.5); //시간차 애니메이션
             }
             &.showing {
-              @include show_sns(1, 8); //시간차 애니메이션
+              @include show_sns(1, 9); //시간차 애니메이션
             }
             &.active {
               display: block;
