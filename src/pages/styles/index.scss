@@ -72,8 +72,13 @@ html {
           font-size: 1.5rem;
           border-radius: 6px;
           border: 1px solid var(--btn);
+          outline: none;
           &::placeholder {
             font-size: 1.2rem;
+          }
+          &:focus {
+            box-shadow: 1px 1px 10px #838383;
+            transition: box-shadow 0.2s linear;
           }
         }
         .input_box_search {
