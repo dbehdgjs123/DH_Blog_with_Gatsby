@@ -24,7 +24,7 @@
 # 📁간략한 폴더구조
 
 > 간략하게 폴더의 구조와 설명을 포현했습니다.
-   * md-pages
+   * md-pages (포스팅 한 글들)
    * src
      - components
        - compoStyles(컴포넌트에 대한 scss파일 모음)
@@ -47,225 +47,233 @@
    * gatsby-node.js (gatsby node api를 위해 필요,페이지를 만들기 위해 사용)
    * gatsby-ssr.js (gatsby의 서버사이드렌더링 api를 위한 컴포넌트. 다크모드를 위해사용)
     
-# 📜주요 기능
+# 📜기능
 
-  전역적으로 상태관리가 필수로 필요한 것들을 redux패턴으로 구현하였다.
-  
-  ### 게시판
-    1. 글상세, 글쓰기, 글 수정, 글 삭제 기능 (crud)
-    2. 글목록을 인기순,최신순,조회순,정확순 등으로 정렬 가능
-    3. 한식,중식,일식 등 타임라인의 카테고리 기능
-    4. 페이지네이션은 무한 스크롤로 구현
-    5. 게시글 좋아요 기능
-    6. 조회수 기능
-  
-  ### 댓글
-    1. 기본적인 댓글기능(댓글 작성,댓글 삭제)
-    2. 댓글 좋아요
-  
-  ### 유저
-    1. 회원가입 및 로그인 기능
-    2. auth 고차컴포넌트를 통한 페이지간 유저 인증
-    3. 마이페이지, 유저 정보보기 기능
-    4. 금주의 요리사(유저 랭킹 기능)
-    5. 좋아요한 레시피뷰 기능
-  
-  ### 검색
-    1. 일반 게시글 검색 기능, 태그 검색 기능
-    2. 사이트에 있는 재료들중 원하는 재료를 통한 재료검색기능
+  1. 마크다운 형식의 글쓰기
+  2. TOC기능(styled-componenet를 활용한 목차기능)
+  3. context api를 활용한 다크모드 구현
+  4. 검색기능
+  5. 태그기능
+  6. 무한 스크롤링
+  7. disqus를 활용한 댓글
+  8. netlify를 활용한 자동 배포
+  9. 검색 엔진 최적화(seo)
    
 # ⚙️프로젝트시 부딪혔던 점들..
 
-### 클라이언트와 서버의 통신
+### TOC 기능
 
-백엔드는  프론트엔드를 한 번에 다 하는 프로젝트는 이번이 처음이었기 때문에 힘든점이 많았다.
+유명한 블로그(velog,medium)들이나 몇몇 디자인이 이쁜 블로그들을 보면 Toc기능이 정말 잘되어 있었다. 내 블로그는 텅텅 빈 느낌이라 구현해보기로 했는데, 기본 목차는 graphql로 어떻게든 가져올 수 있었지만 내가 원하는건 독자가 보고있는 부분이 하이라이트 되는 것이였다.
 
-restful한 api를 짜야한다는 생각은 있었지만 1인 프로젝트에서 지키기에는 너무 딱딱하다고 판단하여 대부분의 요청방식은 get(조회),post(삽입,수정)으로 통일해서 
-조금더 유연하게 프로젝트의 방향을 잡았다. 
-
-axios를 통해 통신하였으며 받는 방식은 무조건 객체형식의 {success: ?, result: ?}로 받기로 컨벤션을 정했다.
-
+이 부분은 그동안 잘 써보지 않았던 styled component를 통해 해결하였다. props를 스타일로 바로 적용할 수 있는 장점을 통해 url를 pros로 받아 그 url과 일치하는 단락을 하이라이트 시켜주었다.
 ```javascript
-   //프론트측 요청방식 일부
-   if (res.data.success) { //성공시
-          setList([...postList, ...res.data.result]);        
-       } else { //실패시
-          alert(res.data.message);
-       }
-```
-```javascript
-   //백엔드측 응답방식 일부
-   const [result] = await pool.query(allSql, [parseInt(limit)]);
-      if (result.length > 0) { //요청한 값이 있을 때
-        return res.json({ success: true, posts: result });
-      } else { //없을 때
-        return res.json({ success: true, posts: [] });
+//toc.js의 상위 컴포넌트인 blog-post.js중 일부
+
+  const onScrollHandler = e => {
+    let checkpoint;
+    const currentOffsetY = window.pageYOffset;
+    const headerElements = document.querySelectorAll(".anchor-header");
+
+    for (const item of headerElements) {
+      const { top } = item.getBoundingClientRect();
+      const elemTop = top + currentOffsetY;
+      //const lastItem = headerElements[headerElements.length - 1];
+      if (elemTop < currentOffsetY + 10) {
+        //현재 아이템의 높이와 페이지 크기를 합친 것보다  현재 높이가 크면 props로 보내준다.
+        //만약 마지막 아이템이면 무조건 크므로 checkpoint를 전달할 수 없게 된다. 그러므로 따로 조건문으로 처리한다.
+        checkpoint = item.href.split(window.location.origin)[1];
+        if (headerElements[headerElements.length - 1] === item) {
+          setTocHighlight(item.href.split(window.location.origin)[1]);
+        }
+      } else {
+        setTocHighlight(checkpoint);
       }
-```
-
-### 상태관리 방향
-
-바로 직전 프로젝트에서 리액트를 사용할땐 context api로 redux의 역할이 해결되었고 전역적인 상태관리의 필요성이 그렇게 크지 않았기 때문에 괜찮았다.
-하지만, 이번 프로젝트는 규모가 조금 더 커졌기 때문에 필요성을 확실히 느꼈고 redux 패턴을 처음 적용하니 난관이 많았다.
-
-최종적으로 리덕스의 액션,액션 생성 함수,리듀서가 한 모듈에 들어간 방식을 채택했다.
-```javascript
-//모듈화된 방식중 일부
-
-//액션
-const LOADING_POST = "LOADING_POST";
-//액션 생성함수
-export const readHandler = (type, limit, isEnd) => async (dispatch) => {
-  const foodType = typeGender(type);
-  window.scrollTo(0, 0);
-  dispatch({
-    type: LOADING_POSTS,
-  });
-  const data = await axios
-    .get(
-      `${process.env.REACT_APP_SERVER_HOST}/api/post/getposts/${foodType}/${limit}`
-    )
-    .then((res) => res.data)
-    .catch((err) => console.log(err));
-
-  if (data.success) {
-    if (data.posts.length < 10) {
-      isEnd();
     }
-    dispatch({
-      type: READ_POSTS,
-      payload: data.posts,
-    });
-  } else {
-    alert(data.message);
-  }
-};
+  };
+```
 
-//초깃값
-const initialState = {
-};
-
-//
-export default function post(state = initialState, action) {
-
-  switch (action.type) {
+```javascript
+//toc.js중 일부
+const Box = styled.div`
     
-    default:
-      return state;
-  }
-}
+    & ul {
+      margin-left:10px;
+    }
+    a {
+      color: #838383;
+    }
+    a[href="${props => props.headerUrl}"] {
+      color: var(--active); /*props로 받은 주소값과 같으면 스타일 변경*/
+      font-size:1.2rem;
+      font-weight: bold;
+      transition: all 0.1s linear;
+    }
+    a:hover {
+      color: var(--active);
+    }
+    li {
+      margin-bottom: 10px; 
+    }
+  `;
 ```
 
-### 페이지간 인증방식
+### 다크모드
 
-페이지간 인증방식은 정말 생각을 많이 해야했다. 내가 생각했던 것들을 정리해보면..
+글을 볼 땐 최적의 환경을 맞춰야 한다고 생각하여 전역적으로 다크모드를 도입하고 싶었다. 하지만 이 것 하나 때문에 redux를 도입하기엔 낭비가 크다고 생각했기 때문에 react에 내장된 context api를 사용해보고자 했다.
 
-1. 로그인 된 유저만 들어갈 수 있는 페이지가 있어야했다.(마이페이지)
-2. 반대로 로그인 된 사람은 들어갈 수 없는 페이지가 있어야 했다.(로그인창,회원가입창)
-3. 상관 없는 페이지도 있어야한다.(일반 게시글)
-
-세 가지 요소를 종합하고 곰곰이 생각해본 결과 bool값을 인자로 받아서 그 값에 따라 각각 다른 컴포넌트를 반환하거나 리다이렉트 할 수 있도록 고차 컴포넌트를 사용하기로 했다.
-```javascript
-//auth.js
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { authHandler } from "../../modules/user";
-import { withRouter } from "react-router-dom";
-
-function Auth(AuthComponent, option = null) {
-  //고차 컴포넌트 구현
-  //옵션 false => 로그인 안 된 사람만 들어온다.
-  //옵션 true =? 로그인 된 사람만 들어온다.
-  function CheckAuth(props) {
-    const dispatch = useDispatch();
-    //auth로 감싸진 모든 컴포넌트로 이동할때마다 호출
-    useEffect(() => {
-      dispatch(authHandler(option, props.history));
-    }, [dispatch, props.history]);
-    return <AuthComponent {...props} />;
-    //props의 불변성을 지켜줘야함
-  }
-  return withRouter(CheckAuth);
-}
-export default Auth;
-```
-```javascript
-//App.js중 일부
-     <Switch>
-       <Route exact path="/" component={Auth(MainPage)} />
-       <Route exact path="/login" component={Auth(LoginPage, false)} />
-     </Switch>
-```
-
-인증 방식은 쿠키에 jwt토큰을 발급 받아서 넣어준 후 쿠키의 유무로 판단하였다.
-```javascript
-//user.js 라우트중 일부
-const token = jwt.sign(
-            {
-              userNo: result[0].user_no, //db의 유저넘버
-            },
-            jwtKey.secret,
-            {
-              expiresIn: "5h", //지속시간
-            }
-          );
-          // 쿠키저장
-          res.cookie("user", token, {
-            httpOnly: true,
-            secure: true,
-            domain: "jabakexpress.site",
-            sameSite: "none",
-          });
-```
-
-### 비밀번호 보안
-
-bcrypt를 사용하여 비밀번호를 암호화하여 데이터베이스에 넣어주었다.
-```javascript
-//user.js 라우트 중 일부
-//비밀번호 암호화
-    bcrypt.hash(password, rounds, async function (err, hash) {
-      const result = await pool.query(sqlCreate, [email, id, hash, nickname]);
-      return res.json({ success: true, result: result });
-    });
-```
-
-### UX
-
-리덕스와 관련된 문제기도 했다.
-
-> 사용자들이 글을 쓰거나 수정하다가 모르고 뒤로가기를 누르면 어떡하지?
->> 사용자들이 글을 보다가 모르고 다른 페이지로 가면 어떡하지?
-
-이런 비슷한 생각들을 하기 시작하면서 UX를 어떻게 좋게 할 수 있는가에 대한 갈등이 시작되었고 리덕스를 적극 도입하기로 했다. 
-리덕스를 사용하면 상태를 전역적으로 관리할 수 있었고 그 말은 즉슨 다른 페이지를 갔다 와도 정보 유지가 가능하다는 뜻이었기 때문이다.
-
-### 디바운싱,쓰로틀
-
-서버의 과부하가 걸릴 일은 그리 많지 않겠지만 버튼을 여러번 누르거나 비정상적인 접근을 연속으로 할 경우의 대비도 하고 싶었다. 
-자연스럽게 디바운스와 쓰로틀을 떠올렸다.
-
-lodash의 메서드를 이용했고, 서버에 직접적으로 요청이 가게되는 것들에 대해선 대부분 디바운스 처리를 해주었다.
-
-### 반응형
-
-모든 페이지는 전부 미디어쿼리로 반응형을 진행했다. 반응형을 조금 쉽게하기 위해 %,vh,vw등을 적극 활용했고 확실히 필요한 곳 빼고 px는 최대한 피했다. 
-
-### 배포
-
-* 배포한 호스팅서비스와 그 이유
-    - react(aws s3, cloudfront 배포) -https가 무료였고 사용하기 편했다.
-    - nodejs(aws ec2,ubuntu 18.04 배포) -서버 초기단계부터 내가 직접 해보고 싶었다.
-    - mysql(digitalocean,ubuntu 18.04 배포) -학생인 나에게 비용이 저렴했고 언어의 장벽 빼곤 사용하기 편했다.
+* 다크모드의 요구사항은 다음과 같았다.
+   - 설정되어 있지 않을 땐 라이트모드
+   - 다음 번 방문할때 현재 테마 저장
+   - 사용자가 직접 바꿀 수 있는 라이트모드,다크모드
    
-aws를 처음 사용해보았기 때문에 재미있었고 어렵기도 했다. 배포한 직후 cors 이슈 때문에 통신이 안될 땐 힘들었다.
+gatsby는 정적 페이지 생성기이기 때문에 다크모드에 관련된 설정은 빌드가 되기 전에 모든게 완료 되어야만 되었다. 다행이 gatsby-ssr에서 이런 문제들을 해결할 수 있었다.  context에대한 provider 컴포넌트를 만들어서 모든 element들을 감싸주었다.
+```javascript
+//gatsby-ssr.js
+import React from "react";
+import GlobalContextProvider from "./src/context/GlobalContextProvider";
 
-cors 이슈는 express의 cors라이브러리를 사용하여 해결했다.
+export const onRenderBody = ({ setPreBodyComponents }) => {
+  setPreBodyComponents([
+    React.createElement("script", {
+      key: "theme",
+      dangerouslySetInnerHTML: {
+        __html: `(function() { //초기설정 즉시실행
+          function setTheme(newTheme) {
+            preferredTheme = newTheme;
+            document.body.className = newTheme;
+            document.body.style.transition = "all 0s"; //깜빡임 현상때문에 불편할 수 있으므로 즉시 0s로 만든다.
+            window.__theme = newTheme; //전역 변수에 저장한다.
+          }
+          let preferredTheme
+          try {
+            preferredTheme = localStorage.getItem('themeColor')
+          } catch (err) {}
 
-### 사이트 보안
+          window.__setPreferredTheme = function (newTheme) {
+            setTheme(newTheme) //토글 함수
+            try {
+              localStorage.setItem('themeColor',newTheme)
+            } catch (err) {}
+          }
+          let darkQuery = window.matchMedia('(prefers-color-scheme: dark)') //미디어 쿼리의 prefers-color-scheme기능을 통해 브라우저의 다크모드 설정을 가져온다.
+            darkQuery.addListener(e => {
+              window.__setPreferredTheme(e.matches ? 'light' : 'dark')
+            })
 
-cloudfront덕분에 react측은 ssl인증서를 발급받을 필요가 없었지만 ec2는 달랐기 때문에 ssl인증서를 받기위해서
-let's encrypt를 통해서 ssl인증서를 무료로 발급 받아 자동갱신을 해주었다.
+            setTheme(preferredTheme || (darkQuery.matches ? 'light' : 'dark')) //로컬스토리지에 있다면 그걸먼저 가져온다.
+        })();`,
+      },
+    }),
+  ]);
+};
+
+export const wrapRootElement = ({ element }) => {
+  return <GlobalContextProvider>{element}</GlobalContextProvider>;
+};
+```
+__setPreferredTheme 함수를 호출하기만 하면 로컬스토리지에 저장되고 테마가 바뀐다.
+
+다크모드일때와 라이트모드일때는 편하게 관리하기 위해 css의 사용자 지정 변수를 사용했다.
+```
+body {
+  &.light {
+    --bg: #f8f8f8;
+    --title: #2c2d31;
+    --subtitle: #838383;
+    --text: #3f3f3f;
+    --btn: #838383;
+    --active: #1b1b1b;
+    --line: #838383;
+    --btn2: #1b1b1b;
+    --btn3: #1b1b1b;
+    --htext: #c9c9c9;
+    --blogtitle: #2c2d31;
+  }
+  &.dark {
+    --bg: #1b1b1b;
+    --title: #cccccc;
+    --subtitle: #636363;
+    --text: #979797;
+    --btn: #636363;
+    --active: #b8b8b8;
+    --line: #636363;
+    --btn2: #727272;
+    --btn3: #1b1b1b;
+    --htext: #9e9e9e;
+    --blogtitle: #b6b6b6;
+  }
+}
+```
+### 댓글
+
+정적 페이지인만큼 댓글 기능을 직접 구현할 수 없었기에 고심 끝에 disqus를 사용했다.
+
+### SEO
+
+이번 프로젝트를 통해 seo에 대한 지식을 많이 얻었다. 잘 모르고 있던 지식이었고 내 블로그를 많이 노출 시키고 싶었기에 자연스럽게 알게 되었다.
+
+_크롤링 -> 색인 생성 -> 순위 지정 -> 게재_
+
+검색 엔진은 대부분 이렇게 돌아간다고 알고 있기에 크롤링을 하는 봇(크롤러)에게 사이트를 정확히 줄 수록 노출 가능성이 높아진다고 했기에 내가 seo를 적용하는데 과정은 이랬다.
+
+1. gatsby에서 sitemap 플러그인을 적용해서 업데이트 자동화를 해주었다.
+2. robots.txt를 통해 사이트의 접근 허용 범위를 크롤러에게 알려주도록 했다.
+
+또한, 헤더에 meta 데이터를 넣어줘야하기 때문에 csr인 react에서는 helmet을 사용할 수 있었다. gatsby-plugin-react-helmet은 여기에 더해져서 정적파일 빌드시 헤더값이 설정되기 때문에 크롤러가 잘 읽을 수 있다.
+
+```javascript
+//seo.js중 일부
+//graphql로 사이트 정보를 가져온후 props로 내려주어 메타데이터에 넣어주었다.
+<Helmet
+      htmlAttributes={{
+        lang: site.siteMetadata.lang ?? lang,
+      }}
+      title={title}
+      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      meta={[
+        {
+          name: `description`,
+          content: metaDescription,
+        },
+        {
+          property: `og:title`,
+          content: title,
+        },
+        {
+          property: `og:description`,
+          content: metaDescription,
+        },
+        {
+          property: `og:type`,
+          content: `website`,
+        },
+        {
+          name: `twitter:card`,
+          content: `summary`,
+        },
+        {
+          name: `twitter:creator`,
+          content: site.siteMetadata.author,
+        },
+        {
+          name: `twitter:title`,
+          content: title,
+        },
+        {
+          name: `twitter:description`,
+          content: metaDescription,
+        },
+        {
+          name: `keywords`,
+          content: keyword,
+        },
+        {
+          name: `google-site-verification`,
+          content: `jnUcvtMlXgf1mv7O-g7lR2zVw_tWnO4KrRrONgACYcQ`,
+        },
+      ].concat(meta)}
+    />
+```
 
 # 완성 모습
  * pc 
