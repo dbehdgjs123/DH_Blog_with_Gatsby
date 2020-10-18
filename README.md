@@ -278,13 +278,13 @@ _크롤링 -> 색인 생성 -> 순위 지정 -> 게재_
 # 완성 모습
  * pc 
  ---
- ![완성(pc)](https://user-images.githubusercontent.com/61229227/96349418-723e2880-10ea-11eb-9c06-eec1749e048b.PNG)
+![1](https://user-images.githubusercontent.com/61229227/96368823-4164fe80-1191-11eb-8229-d6ac1603e381.PNG)
  * ipad 
  ---
- ![완성(ipad)](https://user-images.githubusercontent.com/61229227/96349416-710cfb80-10ea-11eb-87f5-b3fef30e7a81.PNG)
+![2](https://user-images.githubusercontent.com/61229227/96368824-42962b80-1191-11eb-8e40-daadcecd8372.PNG)
  * mobile 
  ---
- ![완성(모바일)](https://user-images.githubusercontent.com/61229227/96349419-736f5580-10ea-11eb-8876-712d13324727.PNG)
+![3](https://user-images.githubusercontent.com/61229227/96368825-432ec200-1191-11eb-8fea-0a2fb1a550ef.PNG)
  
 # 👨🏼‍💻learned...
 
