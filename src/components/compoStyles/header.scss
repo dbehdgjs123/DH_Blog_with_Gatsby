@@ -29,7 +29,7 @@ $dgray: #2c2d31;
   @for $i from $from through $through {
     &:nth-child(#{$i}) {
       animation-name: slide;
-      animation-duration: 0.8s;
+      animation-duration: 0.5s;
       transition: opacity 0.5s ease-in-out #{$i/10}s;
       opacity: 1;
     }
@@ -226,10 +226,10 @@ $dgray: #2c2d31;
             }
             &.hidden {
               //display 속성은 트랜지션의 영향을 받지 않기 때문에 opacity로 관리
-              @include hide_sns(1, 10, 0.5); //시간차 애니메이션
+              @include hide_sns(1, 11, 0.3); //시간차 애니메이션
             }
             &.showing {
-              @include show_sns(1, 10); //시간차 애니메이션
+              @include show_sns(1, 11); //시간차 애니메이션
             }
             &.active {
               display: block;

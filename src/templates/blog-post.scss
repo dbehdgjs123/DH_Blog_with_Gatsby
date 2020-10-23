@@ -38,6 +38,16 @@ body {
   p {
     color: var(--text);
   }
+  ul,
+  ol {
+    color: var(--title);
+  }
+  li {
+    color: var(--text);
+  }
+  a {
+    color: var(--text);
+  }
   main {
     position: relative;
     .blog-post-container {
